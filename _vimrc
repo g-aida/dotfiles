@@ -1,0 +1,243 @@
+"
+" Vim8用サンプル vimrc
+"
+if has('win32')                   " Windows 32bit または 64bit ?
+  set encoding=cp932              " cp932 が嫌なら utf-8 にしてください
+else
+  set encoding=utf-8
+endif
+scriptencoding utf-8              " This file's encoding
+
+" 推奨設定の読み込み (:h defaults.vim)
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+"===============================================================================
+" vim-plugの設定開始（beginの引数はVimプラグインが格納されるディレクトリ）
+call plug#begin('~/.vim/plugged')
+
+" カレントディレクトリのファイル一覧を表示
+Plug 'scrooloose/nerdtree'
+" 複数行コメントアウト
+Plug 'tomtom/tcomment_vim'
+" 行末の不要な空白文字を可視化
+Plug 'bronson/vim-trailing-whitespace'
+" モダンでおしゃれなカラーに
+Plug 'altercation/vim-colors-solarized'
+" 新規ファイル作成時にテンプレートを使用
+Plug 'mattn/sonictemplate-vim'
+" ヴィジュアルモードで選択した文字列を検索
+Plug 'thinca/vim-visualstar'
+" インデントを可視化する
+"Plug 'Yggdroot/indentLine'
+" ステータスラインをいい感じにする
+Plug 'itchyny/lightline.vim'
+" vim-plugの設定終了
+call plug#end()
+
+"===============================================================================
+" 設定の追加はこの行以降でおこなうこと！
+" 分からないオプション名は先頭に ' を付けてhelpしましょう。例:
+" :h 'helplang
+
+packadd! vimdoc-ja                  " 日本語help の読み込み
+set helplang=ja,en                  " help言語の設定
+
+set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次の行の行頭への移動が可能になる
+set number " 行番号を表示
+set cursorline " カーソルラインをハイライト
+" ESCキー2度押しでハイライトの切り替え
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+set scrolloff=999                   " カーソル行が常に画面中央に表示
+set tabstop=4                       " 画面上でタブ文字が占める幅
+set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set autoindent " 改行時に前の行のインデントを継続する
+set smartindent " 改行時に前の行の構文をチェックし次の行のインデントを増減する
+set shiftwidth=4 " smartindentで増減する幅
+
+set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
+set ignorecase " 検索パターンに大文字小文字を区別しない
+set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set hlsearch                        " 検索結果をハイライト
+
+" 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
+nnoremap j gj
+nnoremap k gk
+nnoremap <down> gj
+nnoremap <up> gk
+
+set laststatus=2                  " 常にステータス行を表示する
+set cmdheight=2                   " hit-enter回数を減らすのが目的
+if !has('gui_running')            " gvimではない？ (== 端末)
+  set mouse=                      " マウス無効 (macOS時は不便かも？)
+  set ttimeoutlen=0               " モード変更時の表示更新を最速化
+  if $COLORTERM == "truecolor"    " True Color対応端末？
+    set termguicolors
+  endif
+endif
+set nofixendofline                " Windowsのエディタの人達に嫌われない設定
+set ambiwidth=double              " ○, △, □等の文字幅をASCII文字の倍にする
+set directory-=.                  " swapファイルはローカル作成がトラブル少なめ
+set formatoptions+=mM             " 日本語の途中でも折り返す
+"let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
+set showmatch                     " 括弧の対応関係を一瞬表示する
+"let loaded_matchparen = 1         " カーソルが括弧上にあっても括弧ペアをハイライトさせない
+
+set backspace=indent,eol,start    " バックスペースキーの有効化
+set wildmenu " コマンドモードの補完
+set history=1000 " 保存するコマンド履歴の数
+
+set clipboard=unnamed,autoselect  " ヤンクしたテキストをクリップボードにコピー
+set backupdir=~/vimfiles/tmp      " バックアップファイルの出力先を変更する
+set undodir=~/vimfiles/tmp/undo   " undoファイルの出力先を変更する
+
+hi SpecialKey guibg=#808080
+set list listchars=tab:\|\ 
+
+" :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
+"augroup qf_win
+"  autocmd!
+"  autocmd QuickfixCmdPost [^l]* copen
+"  autocmd QuickfixCmdPost l* lopen
+"augroup END
+
+" マウスの中央ボタンクリックによるクリップボードペースト動作を抑制する
+noremap <MiddleMouse> <Nop>
+noremap! <MiddleMouse> <Nop>
+noremap <2-MiddleMouse> <Nop>
+noremap! <2-MiddleMouse> <Nop>
+noremap <3-MiddleMouse> <Nop>
+noremap! <3-MiddleMouse> <Nop>
+noremap <4-MiddleMouse> <Nop>
+noremap! <4-MiddleMouse> <Nop>
+
+"-------------------------------------------------------------------------------
+" ステータスライン設定
+let &statusline = "%<%f %m%r%h%w[%{&ff}][%{(&fenc!=''?&fenc:&enc).(&bomb?':bom':'')}] "
+if has('iconv')
+  let &statusline .= "0x%{FencB()}"
+
+  function! FencB()
+    let c = matchstr(getline('.'), '.', col('.') - 1)
+    if c != ''
+      let c = iconv(c, &enc, &fenc)
+      return s:Byte2hex(s:Str2byte(c))
+    else
+      return '0'
+    endif
+  endfunction
+  function! s:Str2byte(str)
+    return map(range(len(a:str)), 'char2nr(a:str[v:val])')
+  endfunction
+  function! s:Byte2hex(bytes)
+    return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
+  endfunction
+else
+  let &statusline .= "0x%B"
+endif
+let &statusline .= "%=%l,%c%V %P"
+
+"-------------------------------------------------------------------------------
+" ファイルエンコーディング検出設定
+let &fileencoding = &encoding
+if has('iconv')
+  if &encoding ==# 'utf-8'
+    let &fileencodings = 'iso-2022-jp,euc-jp,cp932,' . &fileencodings
+  else
+    let &fileencodings .= ',iso-2022-jp,utf-8,ucs-2le,ucs-2,euc-jp'
+  endif
+endif
+" 日本語を含まないファイルのエンコーディングは encoding と同じにする
+if has('autocmd')
+  function! AU_ReSetting_Fenc()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding = &encoding
+    endif
+  endfunction
+  augroup resetting_fenc
+    autocmd!
+    autocmd BufReadPost * call AU_ReSetting_Fenc()
+  augroup END
+endif
+
+"-------------------------------------------------------------------------------
+" カラースキームの設定
+colorscheme torte
+
+try
+  silent hi CursorIM
+catch /E411/
+  " CursorIM (IME ON中のカーソル色)が定義されていなければ、紫に設定
+  hi CursorIM ctermfg=16 ctermbg=127 guifg=#000000 guibg=#af00af
+endtry
+
+" vim:set et ts=2 sw=0:
+
+"-------------------------------------------------------------------------------
+" mattn/sonictemplate-vim の設定
+let g:sonictemplate_vim_template_dir = [
+	\ '~/GitHub/template',
+	\ ]
+
+"-------------------------------------------------------------------------------
+" itchyny/lightline.vim の設定
+"
+let g:lightline = {
+		\ 'colorscheme': 'solarized',
+	\ 'mode_map': {'c': 'NORMAL'},
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+	\ },
+	\ 'component_function': {
+	\   'modified': 'LightlineModified',
+	\   'readonly': 'LightlineReadonly',
+	\   'fugitive': 'LightlineFugitive',
+	\   'filename': 'LightlineFilename',
+	\   'fileformat': 'LightlineFileformat',
+	\   'filetype': 'LightlineFiletype',
+	\   'fileencoding': 'LightlineFileencoding',
+	\   'mode': 'LightlineMode'
+	\	}
+	\ }
+
+function! LightlineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+		\  &ft == 'unite' ? unite#get_status_string() :
+		\  &ft == 'vimshell' ? vimshell#get_status_string() :
+		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+		\ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+	return fugitive#head()
+  else
+	return ''
+  endif
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
