@@ -49,17 +49,17 @@ set cursorline " カーソルラインをハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
-set scrolloff=999                   " カーソル行が常に画面中央に表示
-set tabstop=4                       " 画面上でタブ文字が占める幅
-set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
-set autoindent " 改行時に前の行のインデントを継続する
-set smartindent " 改行時に前の行の構文をチェックし次の行のインデントを増減する
-set shiftwidth=4 " smartindentで増減する幅
+set scrolloff=999					" カーソル行が常に画面中央に表示
+set tabstop=4						" 画面上でタブ文字が占める幅
+set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set autoindent						" 改行時に前の行のインデントを継続する
+set smartindent						" 改行時に前の行の構文をチェックし次の行のインデントを増減する
+set shiftwidth=4					" smartindentで増減する幅
 
-set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
-set ignorecase " 検索パターンに大文字小文字を区別しない
-set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
-set hlsearch                        " 検索結果をハイライト
+set incsearch						" インクリメンタルサーチ. １文字入力毎に検索を行う
+set ignorecase						" 検索パターンに大文字小文字を区別しない
+set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set hlsearch						" 検索結果をハイライト
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 nnoremap j gj
