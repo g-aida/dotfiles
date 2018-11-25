@@ -1,108 +1,125 @@
 "
-" Vim8—pƒTƒ“ƒvƒ‹ vimrc
+" Vim8ç”¨ã‚µãƒ³ãƒ—ãƒ« vimrc
 "
-if has('win32')					" Windows 32bit ‚Ü‚½‚Í 64bit ?
-	set encoding=utf-8			" cp932 ‚ªŒ™‚È‚ç utf-8 ‚É‚µ‚Ä‚­‚¾‚³‚¢
+if has('win32')					" Windows 32bit ã¾ãŸã¯ 64bit ?
+	set encoding=utf-8			" cp932 ãŒå«Œãªã‚‰ utf-8 ã«ã—ã¦ãã ã•ã„
 else
 	set encoding=utf-8
 endif
 scriptencoding utf-8			" This file's encoding
 
-" „§İ’è‚Ì“Ç‚İ‚İ (:h defaults.vim)
+" æ¨å¥¨è¨­å®šã®èª­ã¿è¾¼ã¿ (:h defaults.vim)
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
 "===============================================================================
-" vim-plug‚Ìİ’èŠJnibegin‚Ìˆø”‚ÍVimƒvƒ‰ƒOƒCƒ“‚ªŠi”[‚³‚ê‚éƒfƒBƒŒƒNƒgƒŠj
+" vim-plugã®è¨­å®šé–‹å§‹ï¼ˆbeginã®å¼•æ•°ã¯Vimãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãŒæ ¼ç´ã•ã‚Œã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªï¼‰
 call plug#begin('~/.vim/plugged')
 
-" ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ìƒtƒ@ƒCƒ‹ˆê——‚ğ•\¦
+" ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§ã‚’è¡¨ç¤º
 Plug 'scrooloose/nerdtree'
-" •¡”sƒRƒƒ“ƒgƒAƒEƒg
+" è¤‡æ•°è¡Œã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
 Plug 'tomtom/tcomment_vim'
-" s––‚Ì•s—v‚È‹ó”’•¶š‚ğ‰Â‹‰»
+" è¡Œæœ«ã®ä¸è¦ãªç©ºç™½æ–‡å­—ã‚’å¯è¦–åŒ–
 Plug 'bronson/vim-trailing-whitespace'
-" ƒ‚ƒ_ƒ“‚Å‚¨‚µ‚á‚ê‚ÈƒJƒ‰[‚É
+" ãƒ¢ãƒ€ãƒ³ã§ãŠã—ã‚ƒã‚Œãªã‚«ãƒ©ãƒ¼ã«
 Plug 'altercation/vim-colors-solarized'
-" V‹Kƒtƒ@ƒCƒ‹ì¬‚Éƒeƒ“ƒvƒŒ[ƒg‚ğg—p
+" æ–°è¦ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ™‚ã«ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ä½¿ç”¨
 Plug 'mattn/sonictemplate-vim'
-" ƒ”ƒBƒWƒ…ƒAƒ‹ƒ‚[ƒh‚Å‘I‘ğ‚µ‚½•¶š—ñ‚ğŒŸõ
+" ãƒ´ã‚£ã‚¸ãƒ¥ã‚¢ãƒ«ãƒ¢ãƒ¼ãƒ‰ã§é¸æŠã—ãŸæ–‡å­—åˆ—ã‚’æ¤œç´¢
 Plug 'thinca/vim-visualstar'
-" ƒCƒ“ƒfƒ“ƒg‚ğ‰Â‹‰»‚·‚é
+" ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’å¯è¦–åŒ–ã™ã‚‹
 "Plug 'Yggdroot/indentLine'
-" ƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚ğ‚¢‚¢Š´‚¶‚É‚·‚é
+" ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã‚’ã„ã„æ„Ÿã˜ã«ã™ã‚‹
 Plug 'itchyny/lightline.vim'
-" vim-plug‚Ìİ’èI—¹
+
+" è£œå®Œæ©Ÿèƒ½æ‹¡å¼µ
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+" ã‚¹ãƒ‹ãƒšãƒƒãƒˆã‚’Vimã«è¿½åŠ 
+Plug 'Shougo/neosnippet.vim'
+" ã‚¹ãƒ‹ãƒšãƒƒãƒˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
+Plug 'Shougo/neosnippet-snippets'
+" vim-plugã®è¨­å®šçµ‚äº†
 call plug#end()
 
 "===============================================================================
-" İ’è‚Ì’Ç‰Á‚Í‚±‚ÌsˆÈ~‚Å‚¨‚±‚È‚¤‚±‚ÆI
-" •ª‚©‚ç‚È‚¢ƒIƒvƒVƒ‡ƒ“–¼‚Íæ“ª‚É ' ‚ğ•t‚¯‚Ähelp‚µ‚Ü‚µ‚å‚¤B—á:
+" è¨­å®šã®è¿½åŠ ã¯ã“ã®è¡Œä»¥é™ã§ãŠã“ãªã†ã“ã¨ï¼
+" åˆ†ã‹ã‚‰ãªã„ã‚ªãƒ—ã‚·ãƒ§ãƒ³åã¯å…ˆé ­ã« ' ã‚’ä»˜ã‘ã¦helpã—ã¾ã—ã‚‡ã†ã€‚ä¾‹:
 " :h 'helplang
 
-packadd! vimdoc-ja					" “ú–{Œêhelp ‚Ì“Ç‚İ‚İ
-set helplang=ja,en					" helpŒ¾Œê‚Ìİ’è
+packadd! vimdoc-ja					" æ—¥æœ¬èªhelp ã®èª­ã¿è¾¼ã¿
+set helplang=ja,en					" helpè¨€èªã®è¨­å®š
 
-set whichwrap=b,s,h,l,<,>,[,],~		" ƒJ[ƒ\ƒ‹‚Ì¶‰EˆÚ“®‚Ås––‚©‚çŸ‚Ìs‚Ìs“ª‚Ö‚ÌˆÚ“®‚ª‰Â”\‚É‚È‚é
-set number							" s”Ô†‚ğ•\¦
-set cursorline						" ƒJ[ƒ\ƒ‹ƒ‰ƒCƒ“‚ğƒnƒCƒ‰ƒCƒg
-" ESCƒL[2“x‰Ÿ‚µ‚ÅƒnƒCƒ‰ƒCƒg‚ÌØ‚è‘Ö‚¦
+set whichwrap=b,s,h,l,<,>,[,],~		" ã‚«ãƒ¼ã‚½ãƒ«ã®å·¦å³ç§»å‹•ã§è¡Œæœ«ã‹ã‚‰æ¬¡ã®è¡Œã®è¡Œé ­ã¸ã®ç§»å‹•ãŒå¯èƒ½ã«ãªã‚‹
+set number							" è¡Œç•ªå·ã‚’è¡¨ç¤º
+set cursorline						" ã‚«ãƒ¼ã‚½ãƒ«ãƒ©ã‚¤ãƒ³ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+" ESCã‚­ãƒ¼2åº¦æŠ¼ã—ã§ãƒã‚¤ãƒ©ã‚¤ãƒˆã®åˆ‡ã‚Šæ›¿ãˆ
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
-set scrolloff=999					" ƒJ[ƒ\ƒ‹s‚ªí‚É‰æ–Ê’†‰›‚É•\¦
-set tabstop=4						" ‰æ–Êã‚Åƒ^ƒu•¶š‚ªè‚ß‚é•
-set softtabstop=4					" ˜A‘±‚µ‚½‹ó”’‚É‘Î‚µ‚Äƒ^ƒuƒL[‚âƒoƒbƒNƒXƒy[ƒXƒL[‚ÅƒJ[ƒ\ƒ‹‚ª“®‚­•
-set autoindent						" ‰üs‚É‘O‚Ìs‚ÌƒCƒ“ƒfƒ“ƒg‚ğŒp‘±‚·‚é
-set smartindent						" ‰üs‚É‘O‚Ìs‚Ì\•¶‚ğƒ`ƒFƒbƒN‚µŸ‚Ìs‚ÌƒCƒ“ƒfƒ“ƒg‚ğ‘Œ¸‚·‚é
-set shiftwidth=4					" smartindent‚Å‘Œ¸‚·‚é•
+set scrolloff=999					" ã‚«ãƒ¼ã‚½ãƒ«è¡ŒãŒå¸¸ã«ç”»é¢ä¸­å¤®ã«è¡¨ç¤º
+set tabstop=4						" ç”»é¢ä¸Šã§ã‚¿ãƒ–æ–‡å­—ãŒå ã‚ã‚‹å¹…
+set softtabstop=4					" é€£ç¶šã—ãŸç©ºç™½ã«å¯¾ã—ã¦ã‚¿ãƒ–ã‚­ãƒ¼ã‚„ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§ã‚«ãƒ¼ã‚½ãƒ«ãŒå‹•ãå¹…
+set autoindent						" æ”¹è¡Œæ™‚ã«å‰ã®è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’ç¶™ç¶šã™ã‚‹
+set smartindent						" æ”¹è¡Œæ™‚ã«å‰ã®è¡Œã®æ§‹æ–‡ã‚’ãƒã‚§ãƒƒã‚¯ã—æ¬¡ã®è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’å¢—æ¸›ã™ã‚‹
+set shiftwidth=4					" smartindentã§å¢—æ¸›ã™ã‚‹å¹…
 
-set incsearch						" ƒCƒ“ƒNƒŠƒƒ“ƒ^ƒ‹ƒT[ƒ`. ‚P•¶š“ü—Í–ˆ‚ÉŒŸõ‚ğs‚¤
-set ignorecase						" ŒŸõƒpƒ^[ƒ“‚É‘å•¶š¬•¶š‚ğ‹æ•Ê‚µ‚È‚¢
-set smartcase						" ŒŸõƒpƒ^[ƒ“‚É‘å•¶š‚ğŠÜ‚ñ‚Å‚¢‚½‚ç‘å•¶š¬•¶š‚ğ‹æ•Ê‚·‚é
-set hlsearch						" ŒŸõŒ‹‰Ê‚ğƒnƒCƒ‰ƒCƒg
+set incsearch						" ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ã‚¿ãƒ«ã‚µãƒ¼ãƒ. ï¼‘æ–‡å­—å…¥åŠ›æ¯ã«æ¤œç´¢ã‚’è¡Œã†
+set ignorecase						" æ¤œç´¢ãƒ‘ã‚¿ãƒ¼ãƒ³ã«å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã—ãªã„
+set smartcase						" æ¤œç´¢ãƒ‘ã‚¿ãƒ¼ãƒ³ã«å¤§æ–‡å­—ã‚’å«ã‚“ã§ã„ãŸã‚‰å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã™ã‚‹
+set hlsearch						" æ¤œç´¢çµæœã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆ
 
-" s‚ªÜ‚è•Ô‚µ•\¦‚³‚ê‚Ä‚¢‚½ê‡As’PˆÊ‚Å‚Í‚È‚­•\¦s’PˆÊ‚ÅƒJ[ƒ\ƒ‹‚ğˆÚ“®‚·‚é
+" è¡ŒãŒæŠ˜ã‚Šè¿”ã—è¡¨ç¤ºã•ã‚Œã¦ã„ãŸå ´åˆã€è¡Œå˜ä½ã§ã¯ãªãè¡¨ç¤ºè¡Œå˜ä½ã§ã‚«ãƒ¼ã‚½ãƒ«ã‚’ç§»å‹•ã™ã‚‹
 nnoremap j gj
 nnoremap k gk
 nnoremap <down> gj
 nnoremap <up> gk
 
-set laststatus=2					" í‚ÉƒXƒe[ƒ^ƒXs‚ğ•\¦‚·‚é
-set cmdheight=2						" hit-enter‰ñ”‚ğŒ¸‚ç‚·‚Ì‚ª–Ú“I
-if !has('gui_running')				" gvim‚Å‚Í‚È‚¢H (== ’[––)
-	set mouse=						" ƒ}ƒEƒX–³Œø (macOS‚Í•s•Ö‚©‚àH)
-	set ttimeoutlen=0					" ƒ‚[ƒh•ÏX‚Ì•\¦XV‚ğÅ‘¬‰»
-	if $COLORTERM == "truecolor"		" True Color‘Î‰’[––H
+set laststatus=2					" å¸¸ã«ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡Œã‚’è¡¨ç¤ºã™ã‚‹
+set cmdheight=2						" hit-enterå›æ•°ã‚’æ¸›ã‚‰ã™ã®ãŒç›®çš„
+if !has('gui_running')				" gvimã§ã¯ãªã„ï¼Ÿ (== ç«¯æœ«)
+	set mouse=						" ãƒã‚¦ã‚¹ç„¡åŠ¹ (macOSæ™‚ã¯ä¸ä¾¿ã‹ã‚‚ï¼Ÿ)
+	set ttimeoutlen=0					" ãƒ¢ãƒ¼ãƒ‰å¤‰æ›´æ™‚ã®è¡¨ç¤ºæ›´æ–°ã‚’æœ€é€ŸåŒ–
+	if $COLORTERM == "truecolor"		" True Colorå¯¾å¿œç«¯æœ«ï¼Ÿ
 		set termguicolors
 	endif
 endif
-set nofixendofline					" Windows‚ÌƒGƒfƒBƒ^‚Ìl’B‚ÉŒ™‚í‚ê‚È‚¢İ’è
-set ambiwidth=double				" ›, ¢,  “™‚Ì•¶š•‚ğASCII•¶š‚Ì”{‚É‚·‚é
-set directory-=.					" swapƒtƒ@ƒCƒ‹‚Íƒ[ƒJƒ‹ì¬‚ªƒgƒ‰ƒuƒ‹­‚È‚ß
-set formatoptions+=mM				" “ú–{Œê‚Ì“r’†‚Å‚àÜ‚è•Ô‚·
+set nofixendofline					" Windowsã®ã‚¨ãƒ‡ã‚£ã‚¿ã®äººé”ã«å«Œã‚ã‚Œãªã„è¨­å®š
+set ambiwidth=double				" â—‹, â–³, â–¡ç­‰ã®æ–‡å­—å¹…ã‚’ASCIIæ–‡å­—ã®å€ã«ã™ã‚‹
+set directory-=.					" swapãƒ•ã‚¡ã‚¤ãƒ«ã¯ãƒ­ãƒ¼ã‚«ãƒ«ä½œæˆãŒãƒˆãƒ©ãƒ–ãƒ«å°‘ãªã‚
+set formatoptions+=mM				" æ—¥æœ¬èªã®é€”ä¸­ã§ã‚‚æŠ˜ã‚Šè¿”ã™
 "let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
-set showmatch						" Š‡ŒÊ‚Ì‘Î‰ŠÖŒW‚ğˆêu•\¦‚·‚é
-"let loaded_matchparen = 1			" ƒJ[ƒ\ƒ‹‚ªŠ‡ŒÊã‚É‚ ‚Á‚Ä‚àŠ‡ŒÊƒyƒA‚ğƒnƒCƒ‰ƒCƒg‚³‚¹‚È‚¢
+set showmatch						" æ‹¬å¼§ã®å¯¾å¿œé–¢ä¿‚ã‚’ä¸€ç¬è¡¨ç¤ºã™ã‚‹
+"let loaded_matchparen = 1			" ã‚«ãƒ¼ã‚½ãƒ«ãŒæ‹¬å¼§ä¸Šã«ã‚ã£ã¦ã‚‚æ‹¬å¼§ãƒšã‚¢ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆã•ã›ãªã„
 
-set backspace=indent,eol,start		" ƒoƒbƒNƒXƒy[ƒXƒL[‚Ì—LŒø‰»
-set wildmenu						" ƒRƒ}ƒ“ƒhƒ‚[ƒh‚Ì•âŠ®
-set history=1000					" •Û‘¶‚·‚éƒRƒ}ƒ“ƒh—š—ğ‚Ì”
+set backspace=indent,eol,start		" ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã®æœ‰åŠ¹åŒ–
+set wildmenu						" ã‚³ãƒãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã®è£œå®Œ
+set history=1000					" ä¿å­˜ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰å±¥æ­´ã®æ•°
 
-set clipboard=unnamed,autoselect	" ƒ„ƒ“ƒN‚µ‚½ƒeƒLƒXƒg‚ğƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[
-set backupdir=~/vimfiles/tmp		" ƒoƒbƒNƒAƒbƒvƒtƒ@ƒCƒ‹‚Ìo—Íæ‚ğ•ÏX‚·‚é
-set undodir=~/vimfiles/tmp/undo		" undoƒtƒ@ƒCƒ‹‚Ìo—Íæ‚ğ•ÏX‚·‚é
+set clipboard=unnamed,autoselect	" ãƒ¤ãƒ³ã‚¯ã—ãŸãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼
+set backupdir=~/vimfiles/tmp		" ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›å…ˆã‚’å¤‰æ›´ã™ã‚‹
+set undodir=~/vimfiles/tmp/undo		" undoãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›å…ˆã‚’å¤‰æ›´ã™ã‚‹
+
+set belloff=all						"ãƒ“ãƒ¼ãƒ—éŸ³ã‚’æ¶ˆå»
 
 hi SpecialKey guibg=#808080
 set list listchars=tab:\|\ 
 
-" :grep “™‚ÅquickfixƒEƒBƒ“ƒhƒE‚ğŠJ‚­ (:lgrep “™‚ÅlocationlistƒEƒBƒ“ƒhƒE‚ğŠJ‚­)
+" :grep ç­‰ã§quickfixã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã (:lgrep ç­‰ã§locationlistã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã)
 "augroup qf_win
 "  autocmd!
 "  autocmd QuickfixCmdPost [^l]* copen
 "  autocmd QuickfixCmdPost l* lopen
 "augroup END
 
-" ƒ}ƒEƒX‚Ì’†‰›ƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚É‚æ‚éƒNƒŠƒbƒvƒ{[ƒhƒy[ƒXƒg“®ì‚ğ—}§‚·‚é
+" ãƒã‚¦ã‚¹ã®ä¸­å¤®ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã«ã‚ˆã‚‹ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ãƒšãƒ¼ã‚¹ãƒˆå‹•ä½œã‚’æŠ‘åˆ¶ã™ã‚‹
 noremap <MiddleMouse> <Nop>
 noremap! <MiddleMouse> <Nop>
 noremap <2-MiddleMouse> <Nop>
@@ -113,7 +130,7 @@ noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
 
 "-------------------------------------------------------------------------------
-" ƒXƒe[ƒ^ƒXƒ‰ƒCƒ“İ’è
+" ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³è¨­å®š
 let &statusline = "%<%f %m%r%h%w[%{&ff}][%{(&fenc!=''?&fenc:&enc).(&bomb?':bom':'')}] "
 if has('iconv')
 	let &statusline .= "0x%{FencB()}"
@@ -139,7 +156,7 @@ endif
 let &statusline .= "%=%l,%c%V %P"
 
 "-------------------------------------------------------------------------------
-" ƒtƒ@ƒCƒ‹ƒGƒ“ƒR[ƒfƒBƒ“ƒOŒŸoİ’è
+" ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°æ¤œå‡ºè¨­å®š
 let &fileencoding = &encoding
 if has('iconv')
 	if &encoding ==# 'utf-8'
@@ -148,7 +165,7 @@ if has('iconv')
 		let &fileencodings .= ',iso-2022-jp,utf-8,ucs-2le,ucs-2,euc-jp'
 	endif
 endif
-" “ú–{Œê‚ğŠÜ‚Ü‚È‚¢ƒtƒ@ƒCƒ‹‚ÌƒGƒ“ƒR[ƒfƒBƒ“ƒO‚Í encoding ‚Æ“¯‚¶‚É‚·‚é
+" æ—¥æœ¬èªã‚’å«ã¾ãªã„ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã¯ encoding ã¨åŒã˜ã«ã™ã‚‹
 if has('autocmd')
 	function! AU_ReSetting_Fenc()
 		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
@@ -162,26 +179,26 @@ if has('autocmd')
 endif
 
 "-------------------------------------------------------------------------------
-" ƒJƒ‰[ƒXƒL[ƒ€‚Ìİ’è
+" ã‚«ãƒ©ãƒ¼ã‚¹ã‚­ãƒ¼ãƒ ã®è¨­å®š
 colorscheme torte
 
 try
 	silent hi CursorIM
 catch /E411/
-	" CursorIM (IME ON’†‚ÌƒJ[ƒ\ƒ‹F)‚ª’è‹`‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎA‡‚Éİ’è
+	" CursorIM (IME ONä¸­ã®ã‚«ãƒ¼ã‚½ãƒ«è‰²)ãŒå®šç¾©ã•ã‚Œã¦ã„ãªã‘ã‚Œã°ã€ç´«ã«è¨­å®š
 	hi CursorIM ctermfg=16 ctermbg=127 guifg=#000000 guibg=#af00af
 endtry
 
 " vim:set et ts=2 sw=0:
 
 "-------------------------------------------------------------------------------
-" mattn/sonictemplate-vim ‚Ìİ’è
+" mattn/sonictemplate-vim ã®è¨­å®š
 let g:sonictemplate_vim_template_dir = [
 	\ '~/GitHub/template',
 	\ ]
 
 "-------------------------------------------------------------------------------
-" itchyny/lightline.vim ‚Ìİ’è
+" itchyny/lightline.vim ã®è¨­å®š
 "
 let g:lightline = {
 		\ 'colorscheme': 'solarized',
@@ -241,3 +258,28 @@ endfunction
 function! LightlineMode()
 	return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+"-------------------------------------------------------------------------------
+" Shougo/snippet-snippets ã®è¨­å®š
+" è‡ªä½œã‚¹ãƒ‹ãƒšãƒƒãƒˆã‚’ç½®ããƒ•ã‚©ãƒ«ãƒ€æŒ‡å®š
+let g:neosnippet#snippets_directory='~/vimfiles/my_snippets/'
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
