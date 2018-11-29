@@ -34,6 +34,8 @@ Plug 'thinca/vim-visualstar'
 Plug 'itchyny/lightline.vim'
 " インデントガイド
 Plug 'nathanaelkane/vim-indent-guides'
+"複数カーソル
+Plug 'terryma/vim-multiple-cursors'
 
 " 補完機能拡張
 " if has('nvim')
