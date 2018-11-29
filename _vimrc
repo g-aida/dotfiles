@@ -32,21 +32,23 @@ Plug 'thinca/vim-visualstar'
 "Plug 'Yggdroot/indentLine'
 " ステータスラインをいい感じにする
 Plug 'itchyny/lightline.vim'
+" インデントガイド
+Plug 'nathanaelkane/vim-indent-guides'
 
 " 補完機能拡張
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+" if has('nvim')
+" 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"    Plug 'Shougo/deoplete.nvim'
+"    Plug 'roxma/nvim-yarp'
+"    Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"let g:deoplete#enable_at_startup = 1
 
 " スニペットをVimに追加
-Plug 'Shougo/neosnippet.vim'
+"Plug 'Shougo/neosnippet.vim'
 " スニペットテンプレート
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet-snippets'
 " vim-plugの設定終了
 call plug#end()
 
@@ -109,8 +111,8 @@ set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
 set belloff=all						"ビープ音を消去
 
-hi SpecialKey guibg=#808080
-set list listchars=tab:\|\ 
+" hi SpecialKey guibg=#808080
+" set list listchars=tab:\|\ 
 
 " :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
 "augroup qf_win
@@ -283,3 +285,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+"-------------------------------------------------------------------------------
+" nathanaelkane/vim-indent-guides の設定
+let g:indent_guides_enable_on_vim_startup = 1
