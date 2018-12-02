@@ -165,26 +165,26 @@ let &statusline .= "%=%l,%c%V %P"
 
 "-------------------------------------------------------------------------------
 " ファイルエンコーディング検出設定
-let &fileencoding = &encoding
-if has('iconv')
-	if &encoding ==# 'utf-8'
-		let &fileencodings = 'iso-2022-jp,euc-jp,cp932,' . &fileencodings
-	else
-		let &fileencodings .= ',iso-2022-jp,utf-8,ucs-2le,ucs-2,euc-jp'
-	endif
-endif
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
+" if has('iconv')
+" 	if &encoding ==# 'utf-8'
+" 		let &fileencodings = 'iso-2022-jp,euc-jp,cp932,' . &fileencodings
+" 	else
+" 		let &fileencodings .= 'utf-8,iso-2022-jp,ucs-2le,ucs-2,euc-jp'
+" 	endif
+" endif
 " 日本語を含まないファイルのエンコーディングは encoding と同じにする
-if has('autocmd')
-	function! AU_ReSetting_Fenc()
-		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-			let &fileencoding = &encoding
-		endif
-	endfunction
-	augroup resetting_fenc
-		autocmd!
-		autocmd BufReadPost * call AU_ReSetting_Fenc()
-	augroup END
-endif
+" if has('autocmd')
+" 	function! AU_ReSetting_Fenc()
+" 		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+" 			let &fileencoding = &encoding
+" 		endif
+" 	endfunction
+" 	augroup resetting_fenc
+" 		autocmd!
+" 		autocmd BufReadPost * call AU_ReSetting_Fenc()
+" 	augroup END
+" endif
 
 "-------------------------------------------------------------------------------
 " カラースキームの設定
