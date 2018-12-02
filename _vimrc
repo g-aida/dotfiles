@@ -34,8 +34,12 @@ Plug 'thinca/vim-visualstar'
 Plug 'itchyny/lightline.vim'
 " インデントガイド
 Plug 'nathanaelkane/vim-indent-guides'
-"複数カーソル
+" 複数カーソル
 Plug 'terryma/vim-multiple-cursors'
+" ファイルをあいまい検索
+Plug 'kien/ctrlp.vim'
+" HTMLタグを自動的に閉じる
+Plug 'alvan/vim-closetag'
 
 " 補完機能拡張
 " if has('nvim')
@@ -291,3 +295,33 @@ endif
 "-------------------------------------------------------------------------------
 " nathanaelkane/vim-indent-guides の設定
 let g:indent_guides_enable_on_vim_startup = 1
+
+"-------------------------------------------------------------------------------
+" ctrlp/.vim の設定
+" キャッシュディレクトリ
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+" キャッシュを終了時に削除しない
+let g:ctrlp_clear_cache_on_exit = 0
+" 遅延再描画
+let g:ctrlp_lazy_update = 1
+" ルートパスと認識させるためのファイル
+" let g:ctrlp_root_markers = ['Gemfile', 'pom.xml', 'build.xml']
+" CtrlPのウィンドウ最大高さ
+let g:ctrlp_max_height = 20
+" 無視するディレクトリ
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+"-------------------------------------------------------------------------------
+" scrooloose/nerdtree の設定
+" <C-e>でツリーを開く
+nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
+" ブックマークを初期表示
+let g:NERDTreeShowBookmarks=1
+" ディレクトリ表示記号を変更する
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable  = '▶'
+let g:NERDTreeDirArrowCollapsible = '▼'
