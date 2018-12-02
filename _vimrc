@@ -40,6 +40,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'kien/ctrlp.vim'
 " HTMLタグを自動的に閉じる
 Plug 'alvan/vim-closetag'
+" surround関連の編集
+Plug 'tpope/vim-surround'
 
 " 補完機能拡張
 " if has('nvim')
