@@ -69,7 +69,7 @@ packadd! vimdoc-ja					" 日本語help の読み込み
 set helplang=ja,en					" help言語の設定
 
 set whichwrap=b,s,h,l,<,>,[,],~		" カーソルの左右移動で行末から次の行の行頭への移動が可能になる
-set number							" 行番号を表示
+"set number							" 行番号を表示
 set cursorline						" カーソルラインをハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
@@ -85,6 +85,9 @@ set incsearch						" インクリメンタルサーチ. １文字入力毎に検
 set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
+
+set relativenumber					" 相対行を表示
+nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 nnoremap j gj
@@ -323,7 +326,27 @@ let g:ctrlp_custom_ignore = {
 nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
 " ブックマークを初期表示
 let g:NERDTreeShowBookmarks=1
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
+
 " ディレクトリ表示記号を変更する
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable  = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
+
