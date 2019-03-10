@@ -42,7 +42,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'alvan/vim-closetag'
 " surround関連の編集
 Plug 'tpope/vim-surround'
-
+" ソースコード中のカラーをプレビューする
+Plug 'ap/vim-css-color'
 " 補完機能拡張
 " if has('nvim')
 " 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
