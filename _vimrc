@@ -46,6 +46,8 @@ Plug 'tpope/vim-surround'
 Plug 'ap/vim-css-color'
 " 対応するカッコに色を付ける
 Plug 'luochen1990/rainbow'
+" ランダムな時刻をINSERTする
+Plug 'kebiishi/random-date'
 " 補完機能拡張
 " if has('nvim')
 " 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -331,10 +333,10 @@ nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
 let g:NERDTreeShowBookmarks=1
 
 " Vimを起動したときに自動でNERDTreeを表示
-autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" autocmd vimenter * NERDTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
