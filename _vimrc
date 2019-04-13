@@ -93,15 +93,18 @@ set smartcase						" 検索パターンに大文字を含んでいたら大文�
 set hlsearch						" 検索結果をハイライト
 
 set relativenumber					" 相対行を表示
-" nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
-" nnoremap j gjzz
-" nnoremap k gkzz
-" nnoremap <down> gjzz
-" nnoremap <up> gkzz
-" nnoremap <C-f> <C-f>zz
-" nnoremap <C-b> <C-b>zz
+" 常にカーソル位置が画面の中心に来るように移動
+nnoremap j gjzz
+nnoremap k gkzz
+nnoremap <C-f> <C-f><C-d>zz
+nnoremap <C-b> <C-b><C-u>zz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <down> gjzz
+nnoremap <up> gkzz
 
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
