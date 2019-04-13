@@ -80,6 +80,7 @@ set cursorline						" カーソルラインをハイライト
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
 " set scrolloff=999					" カーソル行が常に画面中央に表示
+set scrolloff=0						" defaults.vimで5が指定されているため
 set tabstop=4						" 画面上でタブ文字が占める幅
 set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent						" 改行時に前の行のインデントを継続する
@@ -91,7 +92,7 @@ set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
 
-" set relativenumber					" 相対行を表示
+set relativenumber					" 相対行を表示
 " nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
