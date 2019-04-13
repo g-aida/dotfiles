@@ -103,8 +103,13 @@ nnoremap <C-f> <C-f><C-d>zz
 nnoremap <C-b> <C-b><C-u>zz
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+nnoremap n nzz
+nnoremap N Nzz
 nnoremap <down> gjzz
 nnoremap <up> gkzz
+
+" Vim設定ファイルを開く
+nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
