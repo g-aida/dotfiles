@@ -79,7 +79,7 @@ set cursorline						" カーソルラインをハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
-set scrolloff=999					" カーソル行が常に画面中央に表示
+" set scrolloff=999					" カーソル行が常に画面中央に表示
 set tabstop=4						" 画面上でタブ文字が占める幅
 set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent						" 改行時に前の行のインデントを継続する
@@ -91,14 +91,16 @@ set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
 
-set relativenumber					" 相対行を表示
-nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+" set relativenumber					" 相対行を表示
+" nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
-nnoremap j gj
-nnoremap k gk
-nnoremap <down> gj
-nnoremap <up> gk
+" nnoremap j gjzz
+" nnoremap k gkzz
+" nnoremap <down> gjzz
+" nnoremap <up> gkzz
+" nnoremap <C-f> <C-f>zz
+" nnoremap <C-b> <C-b>zz
 
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
