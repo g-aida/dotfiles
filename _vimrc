@@ -46,6 +46,8 @@ Plug 'tpope/vim-surround'
 Plug 'ap/vim-css-color'
 " 対応するカッコに色を付ける
 Plug 'luochen1990/rainbow'
+" バッファ全体のテキストオブジェクトを追加する
+" Plug 'kana/vim-textobj-entire'
 " ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
@@ -124,6 +126,7 @@ set nofixendofline					" Windowsのエディタの人達に嫌われない設定
 set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にする
 set directory-=.					" swapファイルはローカル作成がトラブル少なめ
 set formatoptions+=mM				" 日本語の途中でも折り返す
+set nrformats=						" すべての数字を10進数として扱う
 "let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
 set showmatch						" 括弧の対応関係を一瞬表示する
 "let loaded_matchparen = 1			" カーソルが括弧上にあっても括弧ペアをハイライトさせない
