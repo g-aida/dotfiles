@@ -49,8 +49,6 @@ Plug 'luochen1990/rainbow'
 " バッファ全体のテキストオブジェクトを追加する
 " Plug 'kana/vim-textobj-entire'
 " ランダムな時刻をINSERTする
-Plug 'macros/matchit'
-" ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
 " if has('nvim')
@@ -83,8 +81,8 @@ set cursorline						" カーソルラインをハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
-" set scrolloff=999					" カーソル行が常に画面中央に表示
-set scrolloff=0						" defaults.vimで5が指定されているため
+set scrolloff=999					" カーソル行が常に画面中央に表示
+" set scrolloff=0						" defaults.vimで5が指定されているため
 set tabstop=4						" 画面上でタブ文字が占める幅
 set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent						" 改行時に前の行のインデントを継続する
@@ -104,23 +102,27 @@ noremap <F1> <Nop>
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 " 常にカーソル位置が画面の中心に来るように移動
-nnoremap j gjzz
-nnoremap k gkzz
-nnoremap gj gjzz
-nnoremap gk gkzz
-nnoremap gg ggzz
-nnoremap G Gzz
+nnoremap j gj
+nnoremap k gk
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$
-nnoremap <C-f> <C-f><C-d>zz
-nnoremap <C-b> <C-b><C-u>zz
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap <down> gjzz
-nnoremap <up> gkzz
+nnoremap <down> gj
+nnoremap <up> gk
+" nnoremap j gjzz
+" nnoremap k gkzz
+" nnoremap gj gjzz
+" nnoremap gk gkzz
+" nnoremap gg ggzz
+" nnoremap G Gzz
+" nnoremap <C-f> <C-f><C-d>zz
+" nnoremap <C-b> <C-b><C-u>zz
+" nnoremap <C-d> <C-d>zz
+" nnoremap <C-u> <C-u>zz
+" nnoremap n nzz
+" nnoremap N Nzz
+" nnoremap <down> gjzz
+" nnoremap <up> gkzz
 
 " Vim設定ファイルを開く
 nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
