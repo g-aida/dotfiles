@@ -49,6 +49,8 @@ Plug 'luochen1990/rainbow'
 " バッファ全体のテキストオブジェクトを追加する
 " Plug 'kana/vim-textobj-entire'
 " ランダムな時刻をINSERTする
+Plug 'macros/matchit'
+" ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
 " if has('nvim')
@@ -97,10 +99,20 @@ set hlsearch						" 検索結果をハイライト
 set relativenumber					" 相対行を表示
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
 
+" F1（ヘルプ）キーを無効に
+noremap <F1> <Nop>
+
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 " 常にカーソル位置が画面の中心に来るように移動
 nnoremap j gjzz
 nnoremap k gkzz
+nnoremap gj gjzz
+nnoremap gk gkzz
+nnoremap gg ggzz
+nnoremap G Gzz
+nnoremap 0 g0
+nnoremap ^ g^
+nnoremap $ g$
 nnoremap <C-f> <C-f><C-d>zz
 nnoremap <C-b> <C-b><C-u>zz
 nnoremap <C-d> <C-d>zz
@@ -112,6 +124,9 @@ nnoremap <up> gkzz
 
 " Vim設定ファイルを開く
 nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
+
+" アクティブなファイルが含まれているディレクトリを手早く展開
+cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
