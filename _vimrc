@@ -107,8 +107,9 @@ nnoremap k gk
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$
-nnoremap <down> gj
+noremap <down> gj
 nnoremap <up> gk
+
 " nnoremap j gjzz
 " nnoremap k gkzz
 " nnoremap gj gjzz
