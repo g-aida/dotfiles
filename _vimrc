@@ -76,7 +76,7 @@ packadd! vimdoc-ja					" 日本語help の読み込み
 set helplang=ja,en					" help言語の設定
 
 set whichwrap=b,s,h,l,<,>,[,],~		" カーソルの左右移動で行末から次の行の行頭への移動が可能になる
-"set number							" 行番号を表示
+set number							" 行番号を表示
 set cursorline						" カーソルラインをハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
