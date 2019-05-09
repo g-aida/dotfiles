@@ -128,6 +128,10 @@ nnoremap <up> gk
 " Vim設定ファイルを開く
 nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 
+" <C-p>、<C-n>でもコマンド履歴のフィルタリングをする
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 " アクティブなファイルが含まれているディレクトリを手早く展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 
