@@ -156,6 +156,8 @@ vnoremap <C-Down> "zdl"zp`[V`]
 " タイポを修正
 inoremap <C-t> <Esc>h"zx"zpa
 
+" 挿入モードでのDelete
+inoremap <C-d> <Del>
 " xやsではヤンクしない
 nnoremap x "_x
 nnoremap s "_s
