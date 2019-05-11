@@ -156,6 +156,10 @@ vnoremap <C-Down> "zdl"zp`[V`]
 " タイポを修正
 inoremap <C-t> <Esc>h"zx"zpa
 
+" xやsではヤンクしない
+nnoremap x "_x
+nnoremap s "_s
+
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
