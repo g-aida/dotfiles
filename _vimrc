@@ -86,6 +86,7 @@ set scrolloff=999					" カーソル行が常に画面中央に表示
 set tabstop=4						" 画面上でタブ文字が占める幅
 set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent						" 改行時に前の行のインデントを継続する
+
 set smartindent						" 改行時に前の行の構文をチェックし次の行のインデントを増減する
 set shiftwidth=4					" smartindentで増減する幅
 
@@ -139,6 +140,12 @@ cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>
 " カーソル下の単語をハイライトしてから置換する
 nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
+
+" 上下に空行を挿入する
+imap <S-CR> <End><CR>
+imap <C-S-CR> <Up><End><CR>
+nnoremap <S-CR> mzo<Esc>`z
+nnoremap <S-C-CR> mzO<Esc>`z
 
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
