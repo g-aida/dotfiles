@@ -147,6 +147,15 @@ imap <C-S-CR> <Up><End><CR>
 nnoremap <S-CR> mzo<Esc>`z
 nnoremap <S-C-CR> mzO<Esc>`z
 
+" 行ごとグリグリと移動
+nnoremap <C-Down> "zddl"zp
+nnoremap <C-Up> "zddk"zP
+vnoremap <C-Up> "zdk"zP`[V`]
+vnoremap <C-Down> "zdl"zp`[V`]
+
+" タイポを修正
+inoremap <C-t> <Esc>h"zx"zpa
+
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
