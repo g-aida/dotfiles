@@ -135,6 +135,8 @@ cnoremap <C-n> <Down>
 " アクティブなファイルが含まれているディレクトリを手早く展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 
+" カーソル下の単語をハイライトする
+nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
