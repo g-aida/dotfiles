@@ -137,6 +137,9 @@ cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 
 " カーソル下の単語をハイライトする
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>
+" カーソル下の単語をハイライトしてから置換する
+nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
+
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
