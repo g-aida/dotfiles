@@ -72,6 +72,12 @@ call plug#end()
 " 分からないオプション名は先頭に ' を付けてhelpしましょう。例:
 " :h 'helplang
 
+" GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
+if has('win64')
+	set shell=C:\Windows\system32\cmd.exe
+	set shellcmdflag=/c
+endif
+
 packadd! vimdoc-ja					" 日本語help の読み込み
 set helplang=ja,en					" help言語の設定
 
