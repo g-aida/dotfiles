@@ -132,6 +132,12 @@ nnoremap <up> gk
 " nnoremap <down> gjzz
 " nnoremap <up> gkzz
 
+" 挿入モードでカーソル移動
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+
 " Vim設定ファイルを開く
 nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 
