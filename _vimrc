@@ -145,6 +145,12 @@ nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+" バッファ内のファイル移動
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
 " アクティブなファイルが含まれているディレクトリを手早く展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 
@@ -162,14 +168,15 @@ nnoremap <S-C-CR> mzO<Esc>`z
 " 行ごとグリグリと移動
 nnoremap <C-Down> "zddl"zp
 nnoremap <C-Up> "zddk"zP
-vnoremap <C-Up> "zdk"zP`[V`]
 vnoremap <C-Down> "zdl"zp`[V`]
+vnoremap <C-Up> "zdk"zP`[V`]
 
 " タイポを修正
 inoremap <C-t> <Esc>h"zx"zpa
 
 " 挿入モードでのDelete
 inoremap <C-d> <Del>
+
 " xやsではヤンクしない
 nnoremap x "_x
 nnoremap s "_s
