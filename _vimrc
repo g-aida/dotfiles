@@ -12,6 +12,18 @@ scriptencoding utf-8			" This file's encoding
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
+" filetypeの設定
+filetype plugin on
+
+"===============================================================================
+" Vim同梱のプラグインを使用
+
+" %コマンドで対となるキーワードの組の間を移動できるように
+runtime macros/matchit.vim
+" 対応するペアの設定
+let b:match_words="<if>:<endif>,
+		\	"
+
 "===============================================================================
 " vim-plugの設定開始（beginの引数はVimプラグインが格納されるディレクトリ）
 call plug#begin('~/.vim/plugged')
@@ -145,11 +157,17 @@ nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-" バッファ内のファイル移動
+" バッファリストのファイル移動
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+" 引数リストのファイル移動
+nnoremap <silent> [a :prev<CR>
+nnoremap <silent> ]a :next<CR>
+nnoremap <silent> [A :first<CR>
+nnoremap <silent> ]A :last<CR>
 
 " アクティブなファイルが含まれているディレクトリを手早く展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
