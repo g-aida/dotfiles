@@ -533,4 +533,4 @@ let g:rainbow_conf = {
 
 "--------------------------------------------------------------------------------
 " reireias/vim-cheatsheet の設定
-let g:cheatsheet#cheat_file = '~/.vim_cheatsheet.md'
+let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
