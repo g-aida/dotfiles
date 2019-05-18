@@ -60,6 +60,8 @@ Plug 'ap/vim-css-color'
 Plug 'luochen1990/rainbow'
 " バッファ全体のテキストオブジェクトを追加する
 " Plug 'kana/vim-textobj-entire'
+" Vimチートシートを別ペインで表示する
+Plug 'reireias/vim-cheatsheet'
 " ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
@@ -528,3 +530,7 @@ let g:rainbow_conf = {
     \		'css': 0,
     \	}
     \}
+
+"--------------------------------------------------------------------------------
+" reireias/vim-cheatsheet の設定
+let g:cheatsheet#cheat_file = '~/vim_cheatsheet.txt'
