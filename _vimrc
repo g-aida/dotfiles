@@ -26,7 +26,7 @@ let b:match_words="<if>:<endif>,
 
 "===============================================================================
 " vim-plugの設定開始（beginの引数はVimプラグインが格納されるディレクトリ）
-call plug#begin('~/.vim/plugged')
+call plug#begin('$HOME/vim/plugged')
 
 " カレントディレクトリのファイル一覧を表示
 Plug 'scrooloose/nerdtree'
@@ -153,7 +153,7 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
 " Vim設定ファイルを開く
-nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
+nnoremap <Space>. :<C-u>tabnew $HOME/_vimrc<CR>
 
 " <C-p>、<C-n>でもコマンド履歴のフィルタリングをする
 cnoremap <C-p> <Up>
@@ -224,8 +224,8 @@ set wildmenu						" コマンドモードの補完
 set history=1000					" 保存するコマンド履歴の数
 
 set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
-set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
-set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
+set backupdir=$HOME/vimfiles/tmp		" バックアップファイルの出力先を変更する
+set undodir=$HOME/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
 set belloff=all						"ビープ音を消去
 
@@ -314,7 +314,7 @@ endtry
 "-------------------------------------------------------------------------------
 " mattn/sonictemplate-vim の設定
 let g:sonictemplate_vim_template_dir = [
-	\ '~/GitHub/template',
+	\ '$HOME/GitHub/template',
 	\ ]
 
 "-------------------------------------------------------------------------------
@@ -382,7 +382,7 @@ endfunction
 "-------------------------------------------------------------------------------
 " Shougo/snippet-snippets の設定
 " 自作スニペットを置くフォルダ指定
-let g:neosnippet#snippets_directory='~/vimfiles/my_snippets/'
+let g:neosnippet#snippets_directory='$HOME/vimfiles/my_snippets/'
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
