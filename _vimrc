@@ -24,9 +24,19 @@ runtime macros/matchit.vim
 let b:match_words="<if>:<endif>,
 		\	"
 
+" project.vim
+" ファイルが選択されたら、ウィンドウを閉じる
+let g:proj_flags = "imstc"
+" プロジェクトをトグルで開閉する
+nmap <silent> <Leader>P <Plug>ToggleProject
+" デフォルトのプロジェクトを開く
+nmap <silent> <Leader>p :Project<CR>
+" フォールディングを展開した状態で、プロジェクトを開く
+autocmd BufAdd .vimprojects silent! %foldopen!
+
 "===============================================================================
 " vim-plugの設定開始（beginの引数はVimプラグインが格納されるディレクトリ）
-call plug#begin('$HOME/vim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " カレントディレクトリのファイル一覧を表示
 Plug 'scrooloose/nerdtree'
@@ -62,6 +72,8 @@ Plug 'luochen1990/rainbow'
 " Plug 'kana/vim-textobj-entire'
 " Vimチートシートを別ペインで表示する
 Plug 'reireias/vim-cheatsheet'
+" ディレクトリごとに設定ファイルを用意する
+Plug 'thinca/vim-localrc'
 " ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
@@ -115,6 +127,21 @@ set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
 
+" ファイルを開いたときに、カレントディレクトリを編集ファイルディレクトリに変更
+augroup grlcd
+	autocmd!
+	autocmd BufEnter * lcd %:p:h
+augroup END
+
+" 不可視文字を可視化する
+set list listchars=tab:\|\ ,trail:_
+" 全角スペースをハイライトする設定
+augroup highlightIdegraphicSpace
+	autocmd!
+	autocmd ColorScheme * highlight IdeographicSpace term = underline ctermbg = DarkGreen guibg = DarkGreen
+	autocmd VimEnter, WinEnter * match IdeographicSpace /　/
+augroup END
+
 set relativenumber					" 相対行を表示
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
 
@@ -147,13 +174,13 @@ nnoremap <up> gk
 " nnoremap <up> gkzz
 
 " 挿入モードでカーソル移動
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
+" inoremap <C-p> <Up>
+" inoremap <C-n> <Down>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
 " Vim設定ファイルを開く
-nnoremap <Space>. :<C-u>tabnew $HOME/_vimrc<CR>
+nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 
 " <C-p>、<C-n>でもコマンド履歴のフィルタリングをする
 cnoremap <C-p> <Up>
@@ -201,6 +228,15 @@ inoremap <C-d> <Del>
 nnoremap x "_x
 nnoremap s "_s
 
+" Windows用の日本語入力固定モードの設定
+" 挿入モード終了時にIME状態を保存しない
+inoremap <silent> <ESC> <ESC>
+inoremap <silent> <C-[> <ESC>
+" fコマンドでのIMEをOFFにする
+let g:IMState=0
+autocmd InsertEnter * let &iminsert = g:IMState
+autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
+
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
@@ -224,13 +260,12 @@ set wildmenu						" コマンドモードの補完
 set history=1000					" 保存するコマンド履歴の数
 
 set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
-set backupdir=$HOME/vimfiles/tmp		" バックアップファイルの出力先を変更する
-set undodir=$HOME/vimfiles/tmp/undo		" undoファイルの出力先を変更する
+set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
+set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
 set belloff=all						"ビープ音を消去
 
 " hi SpecialKey guibg=#808080
-" set list listchars=tab:\|\ 
 
 " :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
 "augroup qf_win
@@ -314,7 +349,7 @@ endtry
 "-------------------------------------------------------------------------------
 " mattn/sonictemplate-vim の設定
 let g:sonictemplate_vim_template_dir = [
-	\ '$HOME/GitHub/template',
+	\ '~/GitHub/template',
 	\ ]
 
 "-------------------------------------------------------------------------------
@@ -382,7 +417,7 @@ endfunction
 "-------------------------------------------------------------------------------
 " Shougo/snippet-snippets の設定
 " 自作スニペットを置くフォルダ指定
-let g:neosnippet#snippets_directory='$HOME/vimfiles/my_snippets/'
+let g:neosnippet#snippets_directory='~/vimfiles/my_snippets/'
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -534,3 +569,8 @@ let g:rainbow_conf = {
 "--------------------------------------------------------------------------------
 " reireias/vim-cheatsheet の設定
 let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
+
+"--------------------------------------------------------------------------------
+" 上の階層に.local.vimrcがあったらそれを読み込み
+call localrc#load('.local.vimrc', getcwd())
+
