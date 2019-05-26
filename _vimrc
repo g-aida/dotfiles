@@ -133,6 +133,12 @@ augroup grlcd
 	autocmd BufEnter * lcd %:p:h
 augroup END
 
+" vimgrepでの検索後、QuickFixウィンドウを開く
+augroup grepopen
+	autocmd!
+	autocmd QuickfixCmdPost vimgrep cwindow
+augroup END
+
 " 不可視文字を可視化する
 set list listchars=tab:\|\ ,trail:_
 " 全角スペースをハイライトする設定
