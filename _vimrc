@@ -38,6 +38,8 @@ autocmd BufAdd .vimprojects silent! %foldopen!
 " vim-plugの設定開始（beginの引数はVimプラグインが格納されるディレクトリ）
 call plug#begin('~/.vim/plugged')
 
+" Unite.vim（vim用の統合ユーザインターフェース）
+Plug 'Shougo/unite.vim'
 " カレントディレクトリのファイル一覧を表示
 Plug 'scrooloose/nerdtree'
 " 複数行コメントアウト
