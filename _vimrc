@@ -153,18 +153,15 @@ augroup END
 " 	autocmd BufWritePost * call system("ctags -R")
 " augroup END
 
-" vimgrepでの検索後、QuickFixウィンドウを開く
+" :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
+" vimgrep, grep, lgrepそれぞれに対応
 augroup grepopen
 	autocmd!
 	autocmd QuickfixCmdPost vimgrep cwindow
+	autocmd QuickfixCmdPost [^l]* copen
+	autocmd QuickfixCmdPost l* lopen
 augroup END
 
-" :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
-augroup qf_win
- autocmd!
- autocmd QuickfixCmdPost [^l]* copen
- autocmd QuickfixCmdPost l* lopen
-augroup END
 
 " 不可視文字を可視化する
 set list listchars=tab:\|\ ,trail:_
