@@ -129,16 +129,41 @@ set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
 
+" grepコマンドで実行される外部コマンドを指定
+set grepprg=grep\ -n
+
+" Windows用の日本語入力固定モードの設定
+" 挿入モード終了時にIME状態を保存しない
+inoremap <silent> <ESC> <ESC>
+inoremap <silent> <C-[> <ESC>
+" fコマンドでのIMEをOFFにする
+let g:IMState=0
+autocmd InsertEnter * let &iminsert = g:IMState
+autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
+
 " ファイルを開いたときに、カレントディレクトリを編集ファイルディレクトリに変更
 augroup grlcd
 	autocmd!
 	autocmd BufEnter * lcd %:p:h
 augroup END
 
+" ファイルを保存するたびにctagsを自動的に実行する
+" augroup writeCtags
+" 	autocmd!
+" 	autocmd BufWritePost * call system("ctags -R")
+" augroup END
+
 " vimgrepでの検索後、QuickFixウィンドウを開く
 augroup grepopen
 	autocmd!
 	autocmd QuickfixCmdPost vimgrep cwindow
+augroup END
+
+" :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
+augroup qf_win
+ autocmd!
+ autocmd QuickfixCmdPost [^l]* copen
+ autocmd QuickfixCmdPost l* lopen
 augroup END
 
 " 不可視文字を可視化する
@@ -149,6 +174,8 @@ augroup highlightIdegraphicSpace
 	autocmd ColorScheme * highlight IdeographicSpace term = underline ctermbg = DarkGreen guibg = DarkGreen
 	autocmd VimEnter, WinEnter * match IdeographicSpace /　/
 augroup END
+" デフォルトでは可視化しない
+set nolist
 
 set relativenumber					" 相対行を表示
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
@@ -206,6 +233,21 @@ nnoremap <silent> ]a :next<CR>
 nnoremap <silent> [A :first<CR>
 nnoremap <silent> ]A :last<CR>
 
+" Quickfixのファイル移動
+nnoremap <silent> [q :cprev<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [Q :cfirst<CR>
+nnoremap <silent> ]Q :clast<CR>
+
+" タグリストのファイル移動
+nnoremap <silent> [t :tprev<CR>
+nnoremap <silent> ]t :tnext<CR>
+nnoremap <silent> [T :tfirst<CR>
+nnoremap <silent> ]T :tlast<CR>
+
+" タグファイルを再構築する
+nnoremap <F5> :!ctags -R<CR>
+
 " アクティブなファイルが含まれているディレクトリを手早く展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
 
@@ -236,15 +278,6 @@ inoremap <C-d> <Del>
 nnoremap x "_x
 nnoremap s "_s
 
-" Windows用の日本語入力固定モードの設定
-" 挿入モード終了時にIME状態を保存しない
-inoremap <silent> <ESC> <ESC>
-inoremap <silent> <C-[> <ESC>
-" fコマンドでのIMEをOFFにする
-let g:IMState=0
-autocmd InsertEnter * let &iminsert = g:IMState
-autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
-
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
@@ -274,13 +307,6 @@ set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 set belloff=all						"ビープ音を消去
 
 " hi SpecialKey guibg=#808080
-
-" :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
-"augroup qf_win
-"  autocmd!
-"  autocmd QuickfixCmdPost [^l]* copen
-"  autocmd QuickfixCmdPost l* lopen
-"augroup END
 
 " マウスの中央ボタンクリックによるクリップボードペースト動作を抑制する
 noremap <MiddleMouse> <Nop>
