@@ -76,17 +76,21 @@ Plug 'luochen1990/rainbow'
 Plug 'reireias/vim-cheatsheet'
 " ディレクトリごとに設定ファイルを用意する
 Plug 'thinca/vim-localrc'
+" APIドキュメントを参照する
+Plug 'thinca/vim-ref'
+" Emmet記法で爆速開発
+Plug 'mattn/emmet-vim'
 " ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
+" let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python37/')
 " if has('nvim')
 " 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " else
-"    Plug 'Shougo/deoplete.nvim'
-"    Plug 'roxma/nvim-yarp'
-"    Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-"let g:deoplete#enable_at_startup = 1
+" 	Plug 'Shougo/deoplete.nvim'
+" 	Plug 'roxma/nvim-yarp'
+" 	Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 " スニペットをVimに追加
 "Plug 'Shougo/neosnippet.vim'
@@ -598,9 +602,17 @@ let g:rainbow_conf = {
     \}
 
 "--------------------------------------------------------------------------------
+" mattn/emmet-vim の設定
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+"--------------------------------------------------------------------------------
 " reireias/vim-cheatsheet の設定
 let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 
+"--------------------------------------------------------------------------------
+" Shougo/deoplete.nvim の設定
+let g:deoplete#enable_at_startup = 1
 "--------------------------------------------------------------------------------
 " 上の階層に.local.vimrcがあったらそれを読み込み
 call localrc#load('.local.vimrc', getcwd())
