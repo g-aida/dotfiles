@@ -116,8 +116,6 @@ set helplang=ja,en					" help言語の設定
 set whichwrap=b,s,h,l,<,>,[,],~		" カーソルの左右移動で行末から次の行の行頭への移動が可能になる
 set number							" 行番号を表示
 set cursorline						" カーソルラインをハイライト
-" ESCキー2度押しでハイライト削除（/レジスタを削除）
-nnoremap <silent><Esc><Esc> :<C-u>let @/ = ''<CR>
 
 set scrolloff=999					" カーソル行が常に画面中央に表示
 " set scrolloff=0						" defaults.vimで5が指定されているため
@@ -133,8 +131,33 @@ set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
 
-" grepコマンドで実行される外部コマンドを指定
-set grepprg=grep\ -n
+set laststatus=2					" 常にステータス行を表示する
+set cmdheight=2						" hit-enter回数を減らすのが目的
+if !has('gui_running')				" gvimではない？ (== 端末)
+	set mouse=						" マウス無効 (macOS時は不便かも？)
+	set ttimeoutlen=0					" モード変更時の表示更新を最速化
+	if $COLORTERM == "truecolor"		" True Color対応端末？
+		set termguicolors
+	endif
+endif
+set nofixendofline					" Windowsのエディタの人達に嫌われない設定
+set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にする
+set directory-=.					" swapファイルはローカル作成がトラブル少なめ
+set formatoptions+=mM				" 日本語の途中でも折り返す
+set nrformats=						" すべての数字を10進数として扱う
+"let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
+set showmatch						" 括弧の対応関係を一瞬表示する
+"let loaded_matchparen = 1			" カーソルが括弧上にあっても括弧ペアをハイライトさせない
+
+set backspace=indent,eol,start		" バックスペースキーの有効化
+set wildmenu						" コマンドモードの補完
+set history=1000					" 保存するコマンド履歴の数
+
+set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
+set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
+set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
+
+set belloff=all						"ビープ音を消去
 
 " Windows用の日本語入力固定モードの設定
 " 挿入モード終了時にIME状態を保存しない
@@ -144,6 +167,12 @@ inoremap <silent> <C-[> <ESC>
 let g:IMState=0
 autocmd InsertEnter * let &iminsert = g:IMState
 autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
+
+" ESCキー2度押しでハイライト削除（/レジスタを削除）
+nnoremap <silent><Esc><Esc> :<C-u>let @/ = ''<CR>
+
+" grepコマンドで実行される外部コマンドを指定
+set grepprg=grep\ -n
 
 " ファイルを開いたときに、カレントディレクトリを編集ファイルディレクトリに変更
 augroup grlcd
@@ -166,7 +195,6 @@ augroup grepopen
 	autocmd QuickfixCmdPost l* lopen
 augroup END
 
-
 " 不可視文字を可視化する
 set list listchars=tab:\|\ ,trail:_
 " 全角スペースをハイライトする設定
@@ -183,6 +211,7 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
 
 " F1（ヘルプ）キーを無効に
 noremap <F1> <Nop>
+inoremap <F1> <Nop>
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 " 常にカーソル位置が画面の中心に来るように移動
@@ -191,7 +220,7 @@ nnoremap k gk
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$
-noremap <down> gj
+nnoremap <down> gj
 nnoremap <up> gk
 
 " nnoremap j gjzz
@@ -249,8 +278,8 @@ nnoremap <silent> ]T :tlast<CR>
 " タグファイルを再構築する
 nnoremap <F5> :!ctags -R<CR>
 
-" アクティブなファイルが含まれているディレクトリを手早く展開
-cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:h').'/' : '%%'
+" アクティブなファイルが含まれているディレクトリを手早くフルパスに展開
+cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:p:h').'/' : '%%'
 
 " カーソル下の単語をハイライトする
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>
@@ -278,34 +307,6 @@ inoremap <C-d> <Del>
 " xやsではヤンクしない
 nnoremap x "_x
 nnoremap s "_s
-
-set laststatus=2					" 常にステータス行を表示する
-set cmdheight=2						" hit-enter回数を減らすのが目的
-if !has('gui_running')				" gvimではない？ (== 端末)
-	set mouse=						" マウス無効 (macOS時は不便かも？)
-	set ttimeoutlen=0					" モード変更時の表示更新を最速化
-	if $COLORTERM == "truecolor"		" True Color対応端末？
-		set termguicolors
-	endif
-endif
-set nofixendofline					" Windowsのエディタの人達に嫌われない設定
-set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にする
-set directory-=.					" swapファイルはローカル作成がトラブル少なめ
-set formatoptions+=mM				" 日本語の途中でも折り返す
-set nrformats=						" すべての数字を10進数として扱う
-"let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
-set showmatch						" 括弧の対応関係を一瞬表示する
-"let loaded_matchparen = 1			" カーソルが括弧上にあっても括弧ペアをハイライトさせない
-
-set backspace=indent,eol,start		" バックスペースキーの有効化
-set wildmenu						" コマンドモードの補完
-set history=1000					" 保存するコマンド履歴の数
-
-set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
-set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
-set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
-
-set belloff=all						"ビープ音を消去
 
 " hi SpecialKey guibg=#808080
 
