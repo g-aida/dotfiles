@@ -18,6 +18,9 @@ endif
 " filetypeの設定
 filetype plugin on
 
+" pepo-le/win-ime-con.nvim の設定
+let g:win_ime_con_mode = 0
+
 "===============================================================================
 " Vim同梱のプラグインを使用
 
@@ -58,12 +61,6 @@ endif
 
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
-
-	" " dein自身をdeinで管理する
-	" call dein#add(s:dein_repo_dir)
-
-	" " ランダムな時刻をINSERTする
-	" call dein#add('kebiishi/random-date')
 
 	" プラグインリストを収めた TOML ファイル
 	let s:toml_dir  = expand($HOME . '/AppData/Local/nvim/dein/toml')
@@ -137,7 +134,7 @@ set backspace=indent,eol,start		" バックスペースキーの有効化
 set wildmenu						" コマンドモードの補完
 set history=1000					" 保存するコマンド履歴の数
 
-" set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
+set clipboard=unnamed				" ヤンクしたテキストをクリップボードにコピー
 set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
 set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
@@ -156,8 +153,8 @@ set belloff=all						"ビープ音を消去
 
 " Windows用の日本語入力固定モードの設定
 " 挿入モード終了時にIME状態を保存しない
-inoremap <silent> <ESC> <ESC>
-inoremap <silent> <C-[> <ESC>
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+inoremap <silent> <C-[> <ESC>:set iminsert=0<CR>
 " fコマンドでのIMEをOFFにする
 let g:IMState=0
 autocmd InsertEnter * let &iminsert = g:IMState

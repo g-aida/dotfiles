@@ -2,6 +2,17 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+# True Color対応のカラースキーム
+repo = 'jacoborus/tender.vim'
+hook_add = '''
+if (has("termguicolors"))
+	set termguicolors
+endif
+syntax enable
+colorscheme tender
+'''
+
+[[plugins]]
 # Emmet記法で爆速開発
 repo = 'mattn/emmet-vim'
 hook_add = '''
@@ -74,22 +85,25 @@ repo = 'terryma/vim-multiple-cursors'
 [[plugins]]
 # ステータスラインをいい感じにする
 repo = 'itchyny/lightline.vim'
+depends = [
+	'jacoborus/tender.vim',
+]
 hook_add = '''
 let g:lightline = {
-	\ 'colorscheme': 'solarized',
+	\ 'colorscheme': 'tender',
 	\ 'mode_map': {'c': 'NORMAL'},
 	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+	\	'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
 	\ },
 	\ 'component_function': {
-	\   'modified': 'LightlineModified',
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive',
-	\   'filename': 'LightlineFilename',
-	\   'fileformat': 'LightlineFileformat',
-	\   'filetype': 'LightlineFiletype',
-	\   'fileencoding': 'LightlineFileencoding',
-	\   'mode': 'LightlineMode'
+	\	'modified':	    'LightlineModified',
+	\	'readonly':     'LightlineReadonly',
+	\	'fugitive':     'LightlineFugitive',
+	\	'filename':     'LightlineFilename',
+	\	'fileformat':   'LightlineFileformat',
+	\	'filetype':     'LightlineFiletype',
+	\	'fileencoding': 'LightlineFileencoding',
+	\	'mode':         'LightlineMode'
 	\	}
 	\ }
 
@@ -161,6 +175,14 @@ repo = 'reireias/vim-cheatsheet'
 hook_add = '''
 let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 '''
+
+[[plugins]]
+# モード変更時にIME状態を自動で切り替える
+repo = 'pepo-le/win-ime-con.nvim'
+# on_event = 'VimEnter'
+# hook_source = '''
+# g:win_ime_con_mode = 0
+# '''
 
 [[plugins]]
 # ランダムな時刻をINSERTする

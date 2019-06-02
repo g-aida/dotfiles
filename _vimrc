@@ -158,6 +158,7 @@ set history=1000					" 保存するコマンド履歴の数
 set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
 set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
 set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
+
 set noshowmode						" 最終行に現在のモードを表示しない
 
 set belloff=all						"ビープ音を消去
