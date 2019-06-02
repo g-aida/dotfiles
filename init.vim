@@ -114,13 +114,13 @@ set hlsearch						" 検索結果をハイライト
 
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
-if !has('gui_running')				" gvimではない？ (== 端末)
-	set mouse=						" マウス無効 (macOS時は不便かも？)
-	set ttimeoutlen=0					" モード変更時の表示更新を最速化
-	if $COLORTERM == "truecolor"		" True Color対応端末？
-		set termguicolors
-	endif
-endif
+" if !has('gui_running')				" gvimではない？ (== 端末)
+" 	set mouse=						" マウス無効 (macOS時は不便かも？)
+" 	set ttimeoutlen=0					" モード変更時の表示更新を最速化
+" 	if $COLORTERM == "truecolor"		" True Color対応端末？
+" 		set termguicolors
+" 	endif
+" endif
 set nofixendofline					" Windowsのエディタの人達に嫌われない設定
 set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にする
 set directory-=.					" swapファイルはローカル作成がトラブル少なめ

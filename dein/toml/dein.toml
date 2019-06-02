@@ -149,6 +149,10 @@ function! LightlineMode()
 endfunction
 '''
 
+# [[plugins]]
+# ステータスラインをかっこよく
+# repo = 'vim-airline/vim-airline'
+
 [[plugins]]
 # ソースコード中のカラーをプレビューする
 repo = 'ap/vim-css-color'
