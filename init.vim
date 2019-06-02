@@ -11,7 +11,7 @@ scriptencoding utf-8			" This file's encoding
 
 " GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
 if has('win64')
-	set shell=C:\Windows\system32\cmd.exe
+	set shell=C:\Windows\System32\cmd.exe
 	set shellcmdflag=/c
 endif
 
@@ -71,7 +71,7 @@ if dein#load_state(s:dein_dir)
 	let s:lazy_toml = s:toml_dir . '/dein_lazy.toml'
 
 	" TOML を読み込み、キャッシュしておく
-	" call dein#load_toml(s:toml,      {'lazy': 0})
+	call dein#load_toml(s:toml,      {'lazy': 0})
 	call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
 	call dein#end()
@@ -140,6 +140,8 @@ set history=1000					" 保存するコマンド履歴の数
 " set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
 set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
 set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
+
+set noshowmode						" 最終行に現在のモードを表示しない
 
 " Windows用の日本語入力固定モードの設定
 " 挿入モード終了時にIME状態を保存しない

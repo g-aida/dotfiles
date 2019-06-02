@@ -40,46 +40,48 @@ call plug#begin('~/.vim/plugged')
 
 " Unite.vim（vim用の統合ユーザインターフェース）
 Plug 'Shougo/unite.vim'
+" Emmet記法で爆速開発
+Plug 'mattn/emmet-vim'
+" HTMLタグを自動的に閉じる
+Plug 'alvan/vim-closetag'
 " カレントディレクトリのファイル一覧を表示
 Plug 'scrooloose/nerdtree'
+" ディレクトリごとに設定ファイルを用意する
+Plug 'thinca/vim-localrc'
 " 複数行コメントアウト
 Plug 'tomtom/tcomment_vim'
+" surround関連の編集
+Plug 'tpope/vim-surround'
 " 行末の不要な空白文字を可視化
 Plug 'bronson/vim-trailing-whitespace'
 " モダンでおしゃれなカラーに
 Plug 'altercation/vim-colors-solarized'
+" ステータスラインをいい感じにする
+Plug 'itchyny/lightline.vim'
+" .tomlファイルのシンタックス
+Plug 'cespare/vim-toml'
+" 対応するカッコに色を付ける
+Plug 'luochen1990/rainbow'
+" ソースコード中のカラーをプレビューする
+Plug 'ap/vim-css-color'
 " 新規ファイル作成時にテンプレートを使用
 Plug 'mattn/sonictemplate-vim'
 " ヴィジュアルモードで選択した文字列を検索
 Plug 'thinca/vim-visualstar'
 " インデントを可視化する
 "Plug 'Yggdroot/indentLine'
-" ステータスラインをいい感じにする
-Plug 'itchyny/lightline.vim'
 " インデントガイド
 Plug 'nathanaelkane/vim-indent-guides'
 " 複数カーソル
 Plug 'terryma/vim-multiple-cursors'
 " ファイルをあいまい検索
 Plug 'kien/ctrlp.vim'
-" HTMLタグを自動的に閉じる
-Plug 'alvan/vim-closetag'
-" surround関連の編集
-Plug 'tpope/vim-surround'
-" ソースコード中のカラーをプレビューする
-Plug 'ap/vim-css-color'
-" 対応するカッコに色を付ける
-Plug 'luochen1990/rainbow'
 " バッファ全体のテキストオブジェクトを追加する
 " Plug 'kana/vim-textobj-entire'
-" Vimチートシートを別ペインで表示する
-Plug 'reireias/vim-cheatsheet'
-" ディレクトリごとに設定ファイルを用意する
-Plug 'thinca/vim-localrc'
 " APIドキュメントを参照する
 Plug 'thinca/vim-ref'
-" Emmet記法で爆速開発
-Plug 'mattn/emmet-vim'
+" Vimチートシートを別ペインで表示する
+Plug 'reireias/vim-cheatsheet'
 " ランダムな時刻をINSERTする
 Plug 'kebiishi/random-date'
 " 補完機能拡張
@@ -106,7 +108,7 @@ call plug#end()
 
 " GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
 if has('win64')
-	set shell=C:\Windows\system32\cmd.exe
+	set shell=C:\Windows\System32\cmd.exe
 	set shellcmdflag=/c
 endif
 
@@ -156,6 +158,7 @@ set history=1000					" 保存するコマンド履歴の数
 set clipboard=unnamed,autoselect	" ヤンクしたテキストをクリップボードにコピー
 set backupdir=~/vimfiles/tmp		" バックアップファイルの出力先を変更する
 set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
+set noshowmode						" 最終行に現在のモードを表示しない
 
 set belloff=all						"ビープ音を消去
 
@@ -392,7 +395,7 @@ let g:sonictemplate_vim_template_dir = [
 " itchyny/lightline.vim の設定
 "
 let g:lightline = {
-		\ 'colorscheme': 'solarized',
+	\ 'colorscheme': 'solarized',
 	\ 'mode_map': {'c': 'NORMAL'},
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -614,7 +617,9 @@ let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 "--------------------------------------------------------------------------------
 " Shougo/deoplete.nvim の設定
 let g:deoplete#enable_at_startup = 1
+"
 "--------------------------------------------------------------------------------
+" thinca/vim-localtcの設定
 " 上の階層に.local.vimrcがあったらそれを読み込み
 call localrc#load('.local.vimrc', getcwd())
 

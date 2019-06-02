@@ -2,5 +2,166 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'kebiishi/random-date'
+# Emmet記法で爆速開発
+repo = 'mattn/emmet-vim'
+hook_add = '''
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+'''
 
+[[plugins]]
+# カレントディレクトリのファイル一覧を表示
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+" <C-e>でツリーを開く
+nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
+" ブックマークを初期表示
+let g:NERDTreeShowBookmarks=1
+" Vimを起動したときに自動でNERDTreeを表示
+" autocmd vimenter * NERDTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
+
+" ディレクトリ表示記号を変更する
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable  = '▶'
+let g:NERDTreeDirArrowCollapsible = '▼'
+'''
+
+[[plugins]]
+# ディレクトリごとに設定ファイルを用意する
+repo =  'thinca/vim-localrc'
+
+[[plugins]]
+# 複数行コメントアウト
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+# surround関連の編集
+repo =  'tpope/vim-surround'
+
+[[plugins]]
+# ヴィジュアルモードで選択した文字列を検索
+repo = 'thinca/vim-visualstar'
+
+[[plugins]]
+# インデントガイド
+repo = 'nathanaelkane/vim-indent-guides'
+
+[[plugins]]
+# 複数カーソル
+repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+# ステータスラインをいい感じにする
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+let g:lightline = {
+	\ 'colorscheme': 'solarized',
+	\ 'mode_map': {'c': 'NORMAL'},
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+	\ },
+	\ 'component_function': {
+	\   'modified': 'LightlineModified',
+	\   'readonly': 'LightlineReadonly',
+	\   'fugitive': 'LightlineFugitive',
+	\   'filename': 'LightlineFilename',
+	\   'fileformat': 'LightlineFileformat',
+	\   'filetype': 'LightlineFiletype',
+	\   'fileencoding': 'LightlineFileencoding',
+	\   'mode': 'LightlineMode'
+	\	}
+	\ }
+
+function! LightlineModified()
+	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+	return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! LightlineFilename()
+	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+		\  &ft == 'unite' ? unite#get_status_string() :
+		\  &ft == 'vimshell' ? vimshell#get_status_string() :
+		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+		\ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+	if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+		return fugitive#head()
+	else
+		return ''
+	endif
+endfunction
+
+function! LightlineFileformat()
+	return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+	return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+	return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+	return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+'''
+
+[[plugins]]
+# ソースコード中のカラーをプレビューする
+repo = 'ap/vim-css-color'
+
+[[plugins]]
+# 行末の不要な空白文字を可視化
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+# .tomlファイルのシンタックス
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+# ファイルをあいまい検索
+repo = 'kien/ctrlp.vim'
+
+[[plugins]]
+# APIドキュメントを参照する
+repo = 'thinca/vim-ref'
+
+[[plugins]]
+# Vimチートシートを別ペインで表示する
+repo = 'reireias/vim-cheatsheet'
+hook_add = '''
+let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
+'''
+
+[[plugins]]
+# ランダムな時刻をINSERTする
+repo = 'kebiishi/random-date'
