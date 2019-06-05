@@ -140,6 +140,10 @@ set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
 set noshowmode						" 最終行に現在のモードを表示しない
 
+" マルチバイト文字入力のための設定（パッチされているから不要？）
+" set ttimeout
+" set ttimeoutlen=50
+
 " Windows用の日本語入力固定モードの設定
 " 挿入モード終了時にIME状態を保存しない
 inoremap <silent> <ESC> <ESC>
@@ -188,15 +192,15 @@ augroup grepopen
 augroup END
 
 " 不可視文字を可視化する
-set list listchars=tab:\|\ ,trail:_
-" 全角スペースをハイライトする設定
-augroup highlightIdegraphicSpace
-	autocmd!
-	autocmd ColorScheme * highlight IdeographicSpace term = underline ctermbg = DarkGreen guibg = DarkGreen
-	autocmd VimEnter, WinEnter * match IdeographicSpace /　/
-augroup END
-" デフォルトでは可視化しない
-set nolist
+" set list listchars=tab:\|\ ,trail:_
+" " 全角スペースをハイライトする設定
+" augroup highlightIdegraphicSpace
+" 	autocmd!
+" 	autocmd ColorScheme * highlight IdeographicSpace term = underline ctermbg = DarkGreen guibg = DarkGreen
+" 	autocmd VimEnter, WinEnter * match IdeographicSpace /　/
+" augroup END
+" " デフォルトでは可視化しない
+" set nolist
 
 set relativenumber					" 相対行を表示
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
