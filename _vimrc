@@ -12,6 +12,12 @@ scriptencoding utf-8			" This file's encoding
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
+" GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
+if has('win64')
+	set shell=C:\Windows\System32\cmd.exe
+	set shellcmdflag=/c
+endif
+
 " filetypeの設定
 filetype plugin on
 
@@ -35,85 +41,55 @@ nmap <silent> <Leader>p :Project<CR>
 autocmd BufAdd .vimprojects silent! %foldopen!
 
 "===============================================================================
-" vim-plugの設定開始（beginの引数はVimプラグインが格納されるディレクトリ）
-call plug#begin('~/.vim/plugged')
+" dein.vimの設定開始
+if &compatible
+	set nocompatible
+endif
 
-" Unite.vim（vim用の統合ユーザインターフェース）
-Plug 'Shougo/unite.vim'
-" Emmet記法で爆速開発
-Plug 'mattn/emmet-vim'
-" HTMLタグを自動的に閉じる
-Plug 'alvan/vim-closetag'
-" カレントディレクトリのファイル一覧を表示
-Plug 'scrooloose/nerdtree'
-" ディレクトリごとに設定ファイルを用意する
-Plug 'thinca/vim-localrc'
-" 複数行コメントアウト
-Plug 'tomtom/tcomment_vim'
-" surround関連の編集
-Plug 'tpope/vim-surround'
-" 行末の不要な空白文字を可視化
-Plug 'bronson/vim-trailing-whitespace'
-" モダンでおしゃれなカラーに
-Plug 'altercation/vim-colors-solarized'
-" ステータスラインをいい感じにする
-Plug 'itchyny/lightline.vim'
-" .tomlファイルのシンタックス
-Plug 'cespare/vim-toml'
-" 対応するカッコに色を付ける
-Plug 'luochen1990/rainbow'
-" ソースコード中のカラーをプレビューする
-Plug 'ap/vim-css-color'
-" 新規ファイル作成時にテンプレートを使用
-Plug 'mattn/sonictemplate-vim'
-" ヴィジュアルモードで選択した文字列を検索
-Plug 'thinca/vim-visualstar'
-" インデントを可視化する
-"Plug 'Yggdroot/indentLine'
-" インデントガイド
-Plug 'nathanaelkane/vim-indent-guides'
-" 複数カーソル
-Plug 'terryma/vim-multiple-cursors'
-" ファイルをあいまい検索
-Plug 'kien/ctrlp.vim'
-" バッファ全体のテキストオブジェクトを追加する
-" Plug 'kana/vim-textobj-entire'
-" APIドキュメントを参照する
-Plug 'thinca/vim-ref'
-" Vimチートシートを別ペインで表示する
-Plug 'reireias/vim-cheatsheet'
-" ランダムな時刻をINSERTする
-Plug 'kebiishi/random-date'
-" 補完機能拡張
-" let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python37/')
-" if has('nvim')
-" 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-" 	Plug 'Shougo/deoplete.nvim'
-" 	Plug 'roxma/nvim-yarp'
-" 	Plug 'roxma/vim-hug-neovim-rpc'
-" endif
+" プラグインがインストールされるディレクトリ
+let s:dein_dir = expand($HOME . '/.cache/dein')
+" dein.vim本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" スニペットをVimに追加
-"Plug 'Shougo/neosnippet.vim'
-" スニペットテンプレート
-" Plug 'Shougo/neosnippet-snippets'
-" vim-plugの設定終了
-call plug#end()
+" dein.vim がなければgithubから落としてくる
+if &runtimepath !~# '/dein.vim'
+	if !isdirectory(s:dein_repo_dir)
+		execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+	endif
+	execute 'set runtimepath+=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+if dein#load_state(s:dein_dir)
+	call dein#begin(s:dein_dir)
+
+	" プラグインリストを収めた TOML ファイル
+	let s:toml_dir  = expand($HOME . '/AppData/Local/nvim/dein/toml')
+	let s:toml      = s:toml_dir . '/dein.toml'
+	let s:lazy_toml = s:toml_dir . '/dein_lazy.toml'
+
+	" TOML を読み込み、キャッシュしておく
+	call dein#load_toml(s:toml,      {'lazy': 0})
+	call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+	call dein#end()
+	call dein#save_state()
+endif
+
+filetype plugin indent on
+syntax enable
+
+" 未インストールプラグインがあれば起動時にインストールする
+if dein#check_install()
+	call dein#install()
+endif
 
 "===============================================================================
 " 設定の追加はこの行以降でおこなうこと！
 " 分からないオプション名は先頭に ' を付けてhelpしましょう。例:
 " :h 'helplang
 
-" GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
-if has('win64')
-	set shell=C:\Windows\System32\cmd.exe
-	set shellcmdflag=/c
-endif
-
 packadd! vimdoc-ja					" 日本語help の読み込み
-set helplang=ja,en					" help言語の設定
+set helplang=en,ja					" help言語の設定
 
 set whichwrap=b,s,h,l,<,>,[,],~		" カーソルの左右移動で行末から次の行の行頭への移動が可能になる
 set number							" 行番号を表示
@@ -323,304 +299,4 @@ noremap <3-MiddleMouse> <Nop>
 noremap! <3-MiddleMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
-
-"-------------------------------------------------------------------------------
-" ステータスライン設定
-let &statusline = "%<%f %m%r%h%w[%{&ff}][%{(&fenc!=''?&fenc:&enc).(&bomb?':bom':'')}] "
-if has('iconv')
-	let &statusline .= "0x%{FencB()}"
-
-	function! FencB()
-	let c = matchstr(getline('.'), '.', col('.') - 1)
-		if c != ''
-			let c = iconv(c, &enc, &fenc)
-			return s:Byte2hex(s:Str2byte(c))
-		else
-			return '0'
-		endif
-	endfunction
-	function! s:Str2byte(str)
-		return map(range(len(a:str)), 'char2nr(a:str[v:val])')
-	endfunction
-	function! s:Byte2hex(bytes)
-		return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
-	endfunction
-else
-	let &statusline .= "0x%B"
-endif
-let &statusline .= "%=%l,%c%V %P"
-
-"-------------------------------------------------------------------------------
-" ファイルエンコーディング検出設定
-set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
-" if has('iconv')
-" 	if &encoding ==# 'utf-8'
-" 		let &fileencodings = 'iso-2022-jp,euc-jp,cp932,' . &fileencodings
-" 	else
-" 		let &fileencodings .= 'utf-8,iso-2022-jp,ucs-2le,ucs-2,euc-jp'
-" 	endif
-" endif
-" 日本語を含まないファイルのエンコーディングは encoding と同じにする
-" if has('autocmd')
-" 	function! AU_ReSetting_Fenc()
-" 		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-" 			let &fileencoding = &encoding
-" 		endif
-" 	endfunction
-" 	augroup resetting_fenc
-" 		autocmd!
-" 		autocmd BufReadPost * call AU_ReSetting_Fenc()
-" 	augroup END
-" endif
-
-"-------------------------------------------------------------------------------
-" カラースキームの設定
-colorscheme torte
-
-try
-	silent hi CursorIM
-catch /E411/
-	" CursorIM (IME ON中のカーソル色)が定義されていなければ、紫に設定
-	hi CursorIM ctermfg=16 ctermbg=127 guifg=#000000 guibg=#af00af
-endtry
-
-" vim:set et ts=2 sw=0:
-
-"-------------------------------------------------------------------------------
-" mattn/sonictemplate-vim の設定
-let g:sonictemplate_vim_template_dir = [
-	\ '~/GitHub/template',
-	\ ]
-
-"-------------------------------------------------------------------------------
-" itchyny/lightline.vim の設定
-"
-let g:lightline = {
-	\ 'colorscheme': 'solarized',
-	\ 'mode_map': {'c': 'NORMAL'},
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-	\ },
-	\ 'component_function': {
-	\   'modified': 'LightlineModified',
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive',
-	\   'filename': 'LightlineFilename',
-	\   'fileformat': 'LightlineFileformat',
-	\   'filetype': 'LightlineFiletype',
-	\   'fileencoding': 'LightlineFileencoding',
-	\   'mode': 'LightlineMode'
-	\	}
-	\ }
-
-function! LightlineModified()
-	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-	return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
-endfunction
-
-function! LightlineFilename()
-	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-		\  &ft == 'unite' ? unite#get_status_string() :
-		\  &ft == 'vimshell' ? vimshell#get_status_string() :
-		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-		\ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-
-function! LightlineFugitive()
-	if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-		return fugitive#head()
-	else
-		return ''
-	endif
-endfunction
-
-function! LightlineFileformat()
-	return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-	return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileencoding()
-	return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-
-function! LightlineMode()
-	return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-"-------------------------------------------------------------------------------
-" Shougo/snippet-snippets の設定
-" 自作スニペットを置くフォルダ指定
-let g:neosnippet#snippets_directory='~/vimfiles/my_snippets/'
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-"-------------------------------------------------------------------------------
-" nathanaelkane/vim-indent-guides の設定
-let g:indent_guides_enable_on_vim_startup = 1
-
-"-------------------------------------------------------------------------------
-" ctrlp/.vim の設定
-" キャッシュディレクトリ
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-" キャッシュを終了時に削除しない
-let g:ctrlp_clear_cache_on_exit = 0
-" 遅延再描画
-let g:ctrlp_lazy_update = 1
-" ルートパスと認識させるためのファイル
-" let g:ctrlp_root_markers = ['Gemfile', 'pom.xml', 'build.xml']
-" CtrlPのウィンドウ最大高さ
-let g:ctrlp_max_height = 20
-" 無視するディレクトリ
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-"-------------------------------------------------------------------------------
-" scrooloose/nerdtree の設定
-" <C-e>でツリーを開く
-nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
-" ブックマークを初期表示
-let g:NERDTreeShowBookmarks=1
-
-" Vimを起動したときに自動でNERDTreeを表示
-" autocmd vimenter * NERDTree
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
-call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
-call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
-call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
-
-" ディレクトリ表示記号を変更する
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable  = '▶'
-let g:NERDTreeDirArrowCollapsible = '▼'
-
-"-------------------------------------------------------------------------------
-" alvan/vim-closetag の設定
-" filenames like *.xml, *.html, *.xhtml, ...
-" These are the file extensions where this plugin is enabled.
-"
-let g:closetag_filenames = '*.xml,*.html,*.xhtml,*.phtml'
-
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-
-" filetypes like xml, html, xhtml, ...
-" These are the file types where this plugin is enabled.
-"
-let g:closetag_filetypes = 'xml,html,xhtml,phtml'
-
-" filetypes like xml, xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filetypes = 'xhtml,jsx'
-
-" integer value [0|1]
-" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-"
-let g:closetag_emptyTags_caseSensitive = 1
-
-" dict
-" Disables auto-close if not in a "valid" region (based on filetype)
-"
-let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
-
-" Shortcut for closing tags, default is '>'
-"
-let g:closetag_shortcut = '>'
-
-" Add > at current position without closing the current tag, default is ''
-"
-let g:closetag_close_shortcut = '<leader>>'
-
-"-------------------------------------------------------------------------------
-" luochen1990/rainbow の設定
-let g:rainbow_conf = {
-    \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-    \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-    \	'operators': '_,_',
-    \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-    \	'separately': {
-    \		'*': {},
-    \		'tex': {
-    \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-    \		},
-    \		'lisp': {
-    \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-    \		},
-    \		'vim': {
-    \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-    \		},
-    \		'html': {
-	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-    \		},
-    \		'css': 0,
-    \	}
-    \}
-
-"--------------------------------------------------------------------------------
-" mattn/emmet-vim の設定
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-
-"--------------------------------------------------------------------------------
-" reireias/vim-cheatsheet の設定
-let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
-
-"--------------------------------------------------------------------------------
-" Shougo/deoplete.nvim の設定
-let g:deoplete#enable_at_startup = 1
-"
-"--------------------------------------------------------------------------------
-" thinca/vim-localtcの設定
-" 上の階層に.local.vimrcがあったらそれを読み込み
-call localrc#load('.local.vimrc', getcwd())
 

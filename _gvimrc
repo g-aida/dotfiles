@@ -13,11 +13,11 @@ set lines=40				" windowサイズの設定
 "set guioptions-=r			" 右スクロールバーを非表示
 "set guioptions-=L			" 画面縦分割時の左スクロールバーを非表示
 set guicursor+=a:blinkon1700-blinkoff700	" カーソルのブリンクをまったりさせる
-set linespace=0				" 行間を狭くする
+set linespace=1				" 行間を狭くする
 
 " vim:set et ts=2 sw=0:
 
 syntax enable
-set background=light
-colorscheme solarized
+" set background=light
+" colorscheme solarized
 set guifont=MyricaM\ M:h14

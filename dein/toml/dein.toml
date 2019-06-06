@@ -184,9 +184,9 @@ hook_add = '''
 let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 '''
 
-[[plugins]]
+# [[plugins]]
 # モード変更時にIME状態を自動で切り替える
-repo = 'pepo-le/win-ime-con.nvim'
+# repo = 'pepo-le/win-ime-con.nvim'
 # on_event = 'VimEnter'
 # hook_source = '''
 # g:win_ime_con_mode = 0

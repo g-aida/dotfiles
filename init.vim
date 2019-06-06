@@ -140,6 +140,8 @@ set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
 set noshowmode						" 最終行に現在のモードを表示しない
 
+set belloff=all						"ビープ音を消去
+
 " マルチバイト文字入力のための設定（パッチされているから不要？）
 " set ttimeout
 " set ttimeoutlen=50
@@ -153,16 +155,14 @@ let g:IMState=0
 autocmd InsertEnter * let &iminsert = g:IMState
 autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
 
-set belloff=all						"ビープ音を消去
-
-" Windows用の日本語入力固定モードの設定
-" 挿入モード終了時にIME状態を保存しない
-inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
-inoremap <silent> <C-[> <ESC>:set iminsert=0<CR>
-" fコマンドでのIMEをOFFにする
-let g:IMState=0
-autocmd InsertEnter * let &iminsert = g:IMState
-autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
+" " Windows用の日本語入力固定モードの設定
+" " 挿入モード終了時にIME状態を保存しない
+" inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+" inoremap <silent> <C-[> <ESC>:set iminsert=0<CR>
+" " fコマンドでのIMEをOFFにする
+" let g:IMState=0
+" autocmd InsertEnter * let &iminsert = g:IMState
+" autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
 
 " ESCキー2度押しでハイライト削除（/レジスタを削除）
 nnoremap <silent><Esc><Esc> :<C-u>let @/ = ''<CR>
