@@ -21,6 +21,7 @@ endif
 " filetypeの設定
 filetype plugin on
 
+let g:deoplete#enable_at_startup = 1
 "===============================================================================
 " Vim同梱のプラグインを使用
 

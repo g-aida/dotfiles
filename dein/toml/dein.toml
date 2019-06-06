@@ -2,6 +2,10 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]]
 # True Color対応のカラースキーム
 repo = 'jacoborus/tender.vim'
 hook_add = '''
@@ -11,10 +15,6 @@ endif
 syntax enable
 colorscheme tender
 '''
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
 # Emmet記法で爆速開発
@@ -172,6 +172,14 @@ repo = 'cespare/vim-toml'
 [[plugins]]
 # ファイルをあいまい検索
 repo = 'kien/ctrlp.vim'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+on_if = '!has("nvim")'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+on_if = '!has("nvim")'
 
 [[plugins]]
 # APIドキュメントを参照する
