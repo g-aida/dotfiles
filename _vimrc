@@ -1,7 +1,7 @@
 "
 " Vim8用サンプル vimrc
 "
-if has('win32')					" Windows 32bit または 64bit ?
+if has('win32' || 'win64')		" Windows 32bit または 64bit
 	set encoding=utf-8			" cp932 が嫌なら utf-8 にしてください
 else
 	set encoding=utf-8
@@ -21,6 +21,8 @@ endif
 " filetypeの設定
 filetype plugin on
 
+" let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
+" let $NVIM_PYTHON_LOG_LEVEL="DEBUG"
 let g:deoplete#enable_at_startup = 1
 "===============================================================================
 " Vim同梱のプラグインを使用
@@ -89,6 +91,18 @@ endif
 " 分からないオプション名は先頭に ' を付けてhelpしましょう。例:
 " :h 'helplang
 
+" 開いたファイルに合わせてカレントディレクトリを変更
+augroup grlcd
+	autocmd!
+	" Vim起動時はとりあえずホームディレクトリに移動
+	autocmd VimEnter cd ~
+	" 編集ファイルディレクトリに変更
+	autocmd BufEnter * lcd %:p:h
+	" 上位階層に.local.vimrcがあればそれをloadしてディレクトリを変更
+	autocmd VimEnter,BufEnter,BufNewFile,BufReadPost *
+				\	call localrc#load(g:localrc_filename)
+augroup END
+
 packadd! vimdoc-ja					" 日本語help の読み込み
 set helplang=en,ja					" help言語の設定
 
@@ -124,7 +138,6 @@ set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にす
 set directory-=.					" swapファイルはローカル作成がトラブル少なめ
 set formatoptions+=mM				" 日本語の途中でも折り返す
 set nrformats=						" すべての数字を10進数として扱う
-"let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
 set showmatch						" 括弧の対応関係を一瞬表示する
 "let loaded_matchparen = 1			" カーソルが括弧上にあっても括弧ペアをハイライトさせない
 
@@ -153,13 +166,8 @@ autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
 nnoremap <silent><Esc><Esc> :<C-u>let @/ = ''<CR>
 
 " grepコマンドで実行される外部コマンドを指定
-set grepprg=grep\ -n
-
-" ファイルを開いたときに、カレントディレクトリを編集ファイルディレクトリに変更
-augroup grlcd
-	autocmd!
-	autocmd BufEnter * lcd %:p:h
-augroup END
+" set grepprg=grep\ -n
+let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
 
 " ファイルを保存するたびにctagsを自動的に実行する
 " augroup writeCtags
@@ -224,6 +232,9 @@ nnoremap <up> gk
 " inoremap <C-n> <Down>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
+
+" キーワードに複数のマッチがある場合に、どこにジャンプするかを指定する
+nnoremap <C-]> g<C-]>
 
 " Vim設定ファイルを開く
 nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
@@ -300,4 +311,25 @@ noremap <3-MiddleMouse> <Nop>
 noremap! <3-MiddleMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
+
+" -----------------------------------------------
+"  TODO
+"  dein_lazy.tomlが読み込めるようになったら削除
+" NERDTress File highlighting
+" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+" 	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*\.'. a:extension .'#'
+" 	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermfg='. a:fg .' ctermbg='. a:bg .' guifg='. a:guifg .' guibg='. a:guibg
+" endfunction
+" call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
+" call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+" call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+" call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+" call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+" call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+" call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+" call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+" call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+" call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+" call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+" call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 

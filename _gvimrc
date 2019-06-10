@@ -17,7 +17,6 @@ set linespace=1				" 行間を狭くする
 
 " vim:set et ts=2 sw=0:
 
-syntax enable
-" set background=light
-" colorscheme solarized
 set guifont=MyricaM\ M:h14
+" let &guifont='Ricty_Diminished:h13:cSHIFTJIS:qDRAFT'
+" set guifont=*

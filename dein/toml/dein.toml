@@ -2,8 +2,19 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+# アイコンを各種プラグインに適用する
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+
+[[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]]
+# 検索・置換コマンドを賢くする
+repo = 'tpope/vim-abolish'
 
 [[plugins]]
 # True Color対応のカラースキーム
@@ -30,41 +41,47 @@ repo = 'scrooloose/nerdtree'
 hook_add = '''
 " <C-e>でツリーを開く
 nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
+
 " ブックマークを初期表示
 let g:NERDTreeShowBookmarks=1
+
+" 隠しファイルを表示する
+let NERDTreeShowHidden = 1
+
 " Vimを起動したときに自動でNERDTreeを表示
 " autocmd vimenter * NERDTree
+
+" ファイル名が指定された状態でVimが起動された場合はNERDTreeを起動しない
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
-call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
-call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
-call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
-call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
+" 他のバッファをすべて閉じたときにNERDTreeが開いていたらNERDTreeも一緒に閉じる
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " ディレクトリ表示記号を変更する
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable  = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
+
+" ファイルアイコン
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['java'] = '休'
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = '書'
 '''
 
 [[plugins]]
-# ディレクトリごとに設定ファイルを用意する
-repo =  'thinca/vim-localrc'
+# NERDTreeのシンタックスハイライト
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+hook_add = '''
+" アイコンだけでなくファイル名もハイライトする
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+'''
 
 [[plugins]]
 # 複数行コメントアウト
@@ -203,3 +220,7 @@ let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 [[plugins]]
 # ランダムな時刻をINSERTする
 repo = 'kebiishi/random-date'
+
+[[plugins]]
+# ディレクトリごとに設定ファイルを用意する
+repo =  'thinca/vim-localrc'
