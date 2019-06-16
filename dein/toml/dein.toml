@@ -4,6 +4,13 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 # アイコンを各種プラグインに適用する
 repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+" NERDTree
+" フォルダ名の先頭にアイコンを付加する
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" フォルダの開閉によってアイコンを切り替える
+let g:DevIconsEnableFoldersOpenClose = 1
+'''
 
 [[plugins]]
 repo = 'Shougo/defx.nvim'
@@ -64,11 +71,6 @@ let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable  = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
 
-" ファイルアイコン
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
 '''
 
 [[plugins]]
@@ -79,6 +81,26 @@ hook_add = '''
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+
+" フォルダをハイライトする
+let g:NERDTreeHighlightFolders = 1
+let g:NERDTreeHighlightFoldersFullName = 1
+
+" ファイルアイコン
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.vimrc'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gvimrc'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_vimrc'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_gvimrc'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*vimrc.*'] = ''
 '''
 
 [[plugins]]

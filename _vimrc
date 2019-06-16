@@ -165,15 +165,14 @@ autocmd InsertLeave * let g:IMState = &iminsert | set iminsert=0 imsearch=0
 " ESCキー2度押しでハイライト削除（/レジスタを削除）
 nnoremap <silent><Esc><Esc> :<C-u>let @/ = ''<CR>
 
-" grepコマンドで実行される外部コマンドを指定
-" set grepprg=grep\ -n
-let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
-
 " ファイルを保存するたびにctagsを自動的に実行する
 " augroup writeCtags
 " 	autocmd!
 " 	autocmd BufWritePost * call system("ctags -R")
 " augroup END
+
+" grepコマンドで実行される外部コマンドを指定
+let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
 
 " :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
 " vimgrep, grep, lgrepそれぞれに対応
