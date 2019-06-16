@@ -23,15 +23,26 @@ hook_add = 'let g:deoplete#enable_at_startup = 1'
 # 検索・置換コマンドを賢くする
 repo = 'tpope/vim-abolish'
 
+# [[plugins]]
+# # True Color対応のカラースキーム
+# repo = 'jacoborus/tender.vim'
+# hook_add = '''
+# if (has("termguicolors"))
+# 	set termguicolors
+# endif
+# syntax enable
+# colorscheme tender
+# '''
+
 [[plugins]]
-# True Color対応のカラースキーム
-repo = 'jacoborus/tender.vim'
+# レトロなカラースキーム
+repo = 'morhetz/gruvbox'
 hook_add = '''
 if (has("termguicolors"))
 	set termguicolors
 endif
 syntax enable
-colorscheme tender
+colorscheme gruvbox
 '''
 
 [[plugins]]
@@ -127,11 +138,12 @@ repo = 'terryma/vim-multiple-cursors'
 # ステータスラインをいい感じにする
 repo = 'itchyny/lightline.vim'
 depends = [
-	'jacoborus/tender.vim',
+	# 'jacoborus/tender.vim',
+	'morhetz/gruvbox',
 ]
 hook_add = '''
 let g:lightline = {
-	\	'colorscheme': 'tender',
+	\	'colorscheme': 'jellybeans',
 	\	'mode_map': {'c': 'NORMAL'},
 	\	'active': {
 	\		'left': [ ['mode', 'paste'], ['fugitive', 'filename'] ]
