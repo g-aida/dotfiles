@@ -314,21 +314,14 @@ noremap! <4-MiddleMouse> <Nop>
 " -----------------------------------------------
 "  TODO
 "  dein_lazy.tomlが読み込めるようになったら削除
-" NERDTress File highlighting
-" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-" 	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*\.'. a:extension .'#'
-" 	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermfg='. a:fg .' ctermbg='. a:bg .' guifg='. a:guifg .' guibg='. a:guibg
-" endfunction
-" call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
-" call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
-" call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
-" call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
-" call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
-" call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
-" call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
-" call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
-" call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
-" call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
-" call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
-" call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 
+
+
+
+" -----------------------------------------------
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL

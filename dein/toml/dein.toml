@@ -1,11 +1,11 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]]
 # アイコンを各種プラグインに適用する
+[[plugins]]
 repo = 'ryanoasis/vim-devicons'
 hook_add = '''
-" NERDTree
+" NERDTreeの設定
 " フォルダ名の先頭にアイコンを付加する
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 " フォルダの開閉によってアイコンを切り替える
@@ -13,18 +13,33 @@ let g:DevIconsEnableFoldersOpenClose = 1
 '''
 
 [[plugins]]
-repo = 'Shougo/defx.nvim'
+# 非同期コードチェック
+repo = 'w0rp/ale'
+hook_add = '''
+" ワーニング・エラー間を素早くジャンプ
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
 
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = 'let g:deoplete#enable_at_startup = 1'
-
-[[plugins]]
-# 検索・置換コマンドを賢くする
-repo = 'tpope/vim-abolish'
+" 左端のシンボルカラムを表示したままにする
+let g:ale_sign_column_always = 1
+" シンボルを変更する
+let g:ale_sign_error   = ''
+let g:ale_sign_warning = ''
+'''
 
 # [[plugins]]
+# repo = 'Shougo/defx.nvim'
+
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+# 検索・置換コマンドを賢くする
+[[plugins]]
+repo = 'tpope/vim-abolish'
+
 # # True Color対応のカラースキーム
+# [[plugins]]
 # repo = 'jacoborus/tender.vim'
 # hook_add = '''
 # if (has("termguicolors"))
@@ -34,8 +49,8 @@ repo = 'tpope/vim-abolish'
 # colorscheme tender
 # '''
 
-[[plugins]]
 # レトロなカラースキーム
+[[plugins]]
 repo = 'morhetz/gruvbox'
 hook_add = '''
 if (has("termguicolors"))
@@ -45,16 +60,16 @@ syntax enable
 colorscheme gruvbox
 '''
 
-[[plugins]]
 # Emmet記法で爆速開発
+[[plugins]]
 repo = 'mattn/emmet-vim'
 hook_add = '''
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 '''
 
-[[plugins]]
 # カレントディレクトリのファイル一覧を表示
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
 " <C-e>でツリーを開く
@@ -84,8 +99,18 @@ let g:NERDTreeDirArrowCollapsible = '▼'
 
 '''
 
+# タブページ使用時にNERDTreeを便利にする
 [[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+hook_add = '''
+" NERDTreeToggleの代わりにNERDTreeTabsToggleを呼ぶようにする
+" nnoremap <silent><C-e> :<C-u><Plug>NERDTreeTabsToggle<CR>
+map <C-e> <Plug>NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_open_on_gui_startup = 0
+'''
+
 # NERDTreeのシンタックスハイライト
+[[plugins]]
 repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
 hook_add = '''
 " アイコンだけでなくファイル名もハイライトする
@@ -100,53 +125,63 @@ let g:NERDTreeHighlightFoldersFullName = 1
 " ファイルアイコン
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']  = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']   = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.vimrc'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gvimrc'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_vimrc'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_gvimrc'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.vimrc']     = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gvimrc']    = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_vimrc']     = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_gvimrc']    = ''
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*vimrc.*'] = ''
 '''
 
-[[plugins]]
 # 複数行コメントアウト
+[[plugins]]
 repo = 'tomtom/tcomment_vim'
 
-[[plugins]]
 # surround関連の編集
+[[plugins]]
 repo =  'tpope/vim-surround'
 
-[[plugins]]
 # ヴィジュアルモードで選択した文字列を検索
+[[plugins]]
 repo = 'thinca/vim-visualstar'
 
-[[plugins]]
 # インデントガイド
+[[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
 
-[[plugins]]
 # 複数カーソル
+[[plugins]]
 repo = 'terryma/vim-multiple-cursors'
 
-[[plugins]]
 # ステータスラインをいい感じにする
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = [
 	# 'jacoborus/tender.vim',
 	'morhetz/gruvbox',
+	'maximbaz/lightline-ale'
 ]
 hook_add = '''
 let g:lightline = {
 	\	'colorscheme': 'jellybeans',
 	\	'mode_map': {'c': 'NORMAL'},
 	\	'active': {
-	\		'left': [ ['mode', 'paste'], ['fugitive', 'filename'] ]
+	\		'left': [
+	\			['mode', 'paste'],
+	\			['fugitive', 'filename', 'ale'],
+	\		],
+	\		'right': [
+	\			['linter_checking',	'linter_errors', 'linter_warnings', 'linter_ok' ],
+	\			['lineinfo'],
+	\			['percent'],
+	\			['fileformat', 'fileencoding', 'filetype'],
+	\		],
 	\	},
 	\	'component': {
 	\		'lineinfo':	    '%3l/%L:%-2v',
@@ -159,7 +194,7 @@ let g:lightline = {
 	\		'fileformat':   'LightlineFileformat',
 	\		'filetype':     'LightlineFiletype',
 	\		'fileencoding': 'LightlineFileencoding',
-	\		'mode':         'LightlineMode'
+	\		'mode':         'LightlineMode',
 	\	},
     \	'separator': {
 	\		'left': '', 'right': '',
@@ -218,24 +253,54 @@ function! LightlineMode()
 endfunction
 '''
 
-# [[plugins]]
+# ALEによるメッセージをlightlineステータスラインに表示する
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+depends = [
+	'itchyny/lightline.vim'
+	'w0rp/ale',
+]
+hook_add = '''
+let g:lightline.component_expand = {
+	\		'linter_checking': 'lightline#ale#checking',
+	\		'linter_errors':   'lightline#ale#errors',
+	\		'linter_warnings': 'lightline#ale#warnings',
+	\		'linter_ok':       'lightline#ale#ok',
+	\	}
+let g:lightline.component_type = {
+	\		'linter_checking': 'left',
+	\		'linter_errors':   'error',
+	\		'linter_warnings': 'warning',
+	\		'linter_ok':       'left',
+	\	}
+" アイコンを変更
+let g:lightline#ale#indicator_checking = ''
+let g:lightline#ale#indicator_errors   = ''
+let g:lightline#ale#indicator_warnings = ''
+let g:lightline#ale#indicator_ok       = ''
+
+" メッセージのフォーマットを変更する
+let g:ale_echo_msg_format = '[%linter%] %s'
+'''
+
 # ステータスラインをかっこよく
+# [[plugins]]
 # repo = 'vim-airline/vim-airline'
 
-[[plugins]]
 # ソースコード中のカラーをプレビューする
+[[plugins]]
 repo = 'ap/vim-css-color'
 
-[[plugins]]
 # 行末の不要な空白文字を可視化
+[[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 
-[[plugins]]
 # .tomlファイルのシンタックス
+[[plugins]]
 repo = 'cespare/vim-toml'
 
-[[plugins]]
 # ファイルをあいまい検索
+[[plugins]]
 repo = 'kien/ctrlp.vim'
 
 [[plugins]]
@@ -246,29 +311,29 @@ on_if = '!has("nvim")'
 repo = 'roxma/nvim-yarp'
 on_if = '!has("nvim")'
 
-[[plugins]]
 # APIドキュメントを参照する
+[[plugins]]
 repo = 'thinca/vim-ref'
 
-[[plugins]]
 # Vimチートシートを別ペインで表示する
+[[plugins]]
 repo = 'reireias/vim-cheatsheet'
 hook_add = '''
 let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 '''
 
-# [[plugins]]
 # モード変更時にIME状態を自動で切り替える
+# [[plugins]]
 # repo = 'pepo-le/win-ime-con.nvim'
 # on_event = 'VimEnter'
 # hook_source = '''
 # g:win_ime_con_mode = 0
 # '''
 
-[[plugins]]
 # ランダムな時刻をINSERTする
+[[plugins]]
 repo = 'kebiishi/random-date'
 
-[[plugins]]
 # ディレクトリごとに設定ファイルを用意する
+[[plugins]]
 repo =  'thinca/vim-localrc'
