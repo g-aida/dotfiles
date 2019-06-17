@@ -16,6 +16,11 @@ let g:DevIconsEnableFoldersOpenClose = 1
 # 非同期コードチェック
 repo = 'w0rp/ale'
 hook_add = '''
+" linterを指定
+let g:ale_linters = {
+	\	'java' : ['javac'],
+	\ }
+
 " ワーニング・エラー間を素早くジャンプ
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
@@ -303,13 +308,13 @@ repo = 'cespare/vim-toml'
 [[plugins]]
 repo = 'kien/ctrlp.vim'
 
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-on_if = '!has("nvim")'
+# [[plugins]]
+# repo = 'roxma/vim-hug-neovim-rpc'
+# on_if = '!has("nvim")'
 
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-on_if = '!has("nvim")'
+# [[plugins]]
+# repo = 'roxma/nvim-yarp'
+# on_if = '!has("nvim")'
 
 # APIドキュメントを参照する
 [[plugins]]
