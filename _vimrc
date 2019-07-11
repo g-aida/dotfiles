@@ -208,6 +208,11 @@ nnoremap k gk
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$
+nnoremap gj j
+nnoremap gk k
+nnoremap g0 0
+nnoremap g^ ^
+nnoremap g$ $
 nnoremap <down> gj
 nnoremap <up> gk
 
@@ -275,7 +280,7 @@ cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:p:h').'/' : '%%'
 " カーソル下の単語をハイライトする
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>
 " カーソル下の単語をハイライトしてから置換する
-nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
+" nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
 
 " 上下に空行を挿入する
 imap <S-CR> <End><CR>
