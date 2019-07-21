@@ -274,6 +274,9 @@ nnoremap <silent> ]T :tlast<CR>
 " タグファイルを再構築する
 nnoremap <F5> :!ctags -R<CR>
 
+" 補完ポップアップの設定
+set completeopt=menuone,noinsert
+
 " アクティブなファイルが含まれているディレクトリを手早くフルパスに展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:p:h').'/' : '%%'
 

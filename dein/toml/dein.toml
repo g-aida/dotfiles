@@ -39,46 +39,52 @@ let g:lsp_log_file = expand('~/vimfiles/tmp/vim-lsp_log/vim-lsp.log')
 
 " Java -> eclipse.jdt.ls
 if executable('java') && filereadable(expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.300.v20190213-1655.jar'))
-	autocmd User lsp_setup call lsp#register_server({
-		\	'name': 'eclipse.jdt.ls',
-		\	'cmd': {server_info->[
-		\			'java',
-		\			'-Declipse.application=org.eclipse.jdt.ls.core.id1',
-		\			'-Dosgi.bundles.defaultStartLevel=4',
-		\			'-Declipse.product=org.eclipse.jdt.ls.core.product',
-		\			'-Dlog.level=ALL',
-		\			'-noverify',
-		\			'-Dfile.encoding=UTF-8',
-		\			'-Xmx1G',
-		\			'-jar',
-		\			expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.300.v20190213-1655.jar'),
-		\			'-configuration',
-		\			expand('~/lsp/eclipse.jdt.ls/config_win'),
-		\			'-data',
-		\			getcwd()
-		\		]},
-		\	'whitelist': ['java'],
-		\ })
+	augroup EclipseJdt
+		autocmd!
+		autocmd User lsp_setup call lsp#register_server({
+			\	'name': 'eclipse.jdt.ls',
+			\	'cmd': {server_info->[
+			\			'java',
+			\			'-Declipse.application=org.eclipse.jdt.ls.core.id1',
+			\			'-Dosgi.bundles.defaultStartLevel=4',
+			\			'-Declipse.product=org.eclipse.jdt.ls.core.product',
+			\			'-Dlog.level=ALL',
+			\			'-noverify',
+			\			'-Dfile.encoding=UTF-8',
+			\			'-Xmx1G',
+			\			'-jar',
+			\			expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.300.v20190213-1655.jar'),
+			\			'-configuration',
+			\			expand('~/lsp/eclipse.jdt.ls/config_win'),
+			\			'-data',
+			\			getcwd()
+			\		]},
+			\	'whitelist': ['java'],
+			\ })
+	augroup END
 endif
 
 " javascript -> typescript-language-server
 if executable('typescript-language-server')
-	autocmd User lsp_setup call lsp#register_server({
-		\	'name': 'javascript support using typescript-language-server',
-		\	'cmd': {server_info->[
-		\			&shell,
-		\			&shellcmdflag,
-		\			'typescript-language-server --stdio'
-		\		]},
-		\	'root_uri': {server_info->lsp#utils#path_to_uri(
-		\		expand('~/AppData/Roaming/npm/node_modules/typescript-language-server/package.json')
-"		\		lsp#utils#find_nearest_parent_file_directory(
-"		\			lsp#utils#get_buffer_path(),
-"		\			'package.json'
-"		\		)
-		\		)},
-		\	'whitelist': ['javascript', 'javascript.jsx'],
-		\ })
+	augroup TypescriptLanguageServer
+		autocmd!
+		autocmd User lsp_setup call lsp#register_server({
+			\	'name': 'javascript support using typescript-language-server',
+			\	'cmd': {server_info->[
+			\			&shell,
+			\			&shellcmdflag,
+			\			'typescript-language-server --stdio'
+			\		]},
+			\	'root_uri': {server_info->lsp#utils#path_to_uri(
+			\		expand('~/AppData/Roaming/npm/node_modules/typescript-language-server/package.json')
+"			\		lsp#utils#find_nearest_parent_file_directory(
+"			\			lsp#utils#get_buffer_path(),
+"			\			'package.json'
+"			\		)
+			\		)},
+			\	'whitelist': ['javascript', 'javascript.jsx'],
+			\ })
+	augroup END
 endif
 '''
 
@@ -355,18 +361,21 @@ depends = [
 	'w0rp/ale',
 ]
 hook_add = '''
-let g:lightline.component_expand = {
-	\	'linter_checking': 'lightline#ale#checking',
-	\	'linter_errors':   'lightline#ale#errors',
-	\	'linter_warnings': 'lightline#ale#warnings',
-	\	'linter_ok':       'lightline#ale#ok',
+let g:lightline = {
+	\	'component_expand' : {
+	\		'linter_checking': 'lightline#ale#checking',
+	\		'linter_errors':   'lightline#ale#errors',
+	\		'linter_warnings': 'lightline#ale#warnings',
+	\		'linter_ok':       'lightline#ale#ok',
+	\	},
+	\	'component_type' : {
+	\		'linter_checking': 'left',
+	\		'linter_errors':   'error',
+	\		'linter_warnings': 'warning',
+	\		'linter_ok':       'left',
+	\	}
 	\ }
-let g:lightline.component_type = {
-	\	'linter_checking': 'left',
-	\	'linter_errors':   'error',
-	\	'linter_warnings': 'warning',
-	\	'linter_ok':       'left',
-	\ }
+
 " アイコンを変更
 let g:lightline#ale#indicator_checking = ''
 let g:lightline#ale#indicator_errors   = ''
