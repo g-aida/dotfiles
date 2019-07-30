@@ -237,6 +237,12 @@ nnoremap <up> gk
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
+" 12<Enter>を押して12行目に移動する
+nnoremap <CR> G
+
+" ヤンク後にヤンク領域の下部に移動
+vnoremap <silent> y y']
+
 " キーワードに複数のマッチがある場合に、どこにジャンプするかを指定する
 nnoremap <C-]> g<C-]>
 
@@ -318,6 +324,17 @@ noremap <3-MiddleMouse> <Nop>
 noremap! <3-MiddleMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
+
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+	let @" = s:restore_reg
+	return ''
+endfunction
+function! s:Repl()
+	let s:restore_reg = @"
+	return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
 
 " -----------------------------------------------
 "  TODO
