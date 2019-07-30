@@ -151,7 +151,9 @@ set undodir=~/vimfiles/tmp/undo		" undoファイルの出力先を変更する
 
 set noshowmode						" 最終行に現在のモードを表示しない
 
-set belloff=all						"ビープ音を消去
+set belloff=all						" ビープ音を消去
+
+set hidden							" 保存しなくてもバッファ切り替え可能
 
 " Windows用の日本語入力固定モードの設定
 " 挿入モード終了時にIME状態を保存しない
