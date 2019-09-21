@@ -34,7 +34,7 @@ let g:lsp_signs_information= {'text': ''}
 let g:lsp_signs_hint= {'text': ''}
 
 " debug
-let g:lsp_log_verbose = 1
+let g:lsp_log_verbose = 0
 let g:lsp_log_file = expand('~/vimfiles/tmp/vim-lsp_log/vim-lsp.log')
 
 " Java -> eclipse.jdt.ls
@@ -92,7 +92,7 @@ endif
 # 非同期補完
 repo = 'prabirshrestha/asyncomplete.vim'
 hook_add = '''
-let g:asyncomplete_log_file = expand('~/vimfiles/tmp/asyncomplete_log/asyncomplete.log')
+" let g:asyncomplete_log_file = expand('~/vimfiles/tmp/asyncomplete_log/asyncomplete.log')
 
 " 対象ファイルタイプを限定する
 " let g:asyncomplete_enable_for_all = 0
