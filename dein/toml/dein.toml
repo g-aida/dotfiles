@@ -127,6 +127,47 @@ let g:ale_sign_error   = ''
 let g:ale_sign_warning = ''
 '''
 
+# javascriptのインデント・シンタックスハイライト
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+hook_add = '''
+" Enables syntax highlighting for JSDocs.
+let g:javascript_plugin_jsdoc = 0
+" Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
+let g:javascript_plugin_ngdoc = 0
+" Enables syntax highlighting for Flow.
+let g:javascript_plugin_flow = 0
+" JSファイルを自動的に折りたたむ
+" augroup javascript_folding
+"     au!
+"     au FileType javascript setlocal foldmethod=syntax
+" augroup END
+'''
+
+# JavaScript のシンタックス
+[[plugins]]
+repo = 'othree/yajs.vim'
+
+# JavaScript ライブラリのシンタックス
+[[plugins]]
+repo = 'othree/javascript-libraries-syntax.vim'
+hook_add = '''
+function! EnableJavascript()
+	" Setup used libraries
+	let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
+	let b:javascript_lib_use_jquery = 1
+	let b:javascript_lib_use_underscore = 0
+	let b:javascript_lib_use_react = 1
+	let b:javascript_lib_use_flux = 0
+	let b:javascript_lib_use_jasmine = 0
+	let b:javascript_lib_use_d3 = 1
+endfunction
+augroup EnableJavascript
+	autocmd!
+	autocmd FileType javascript,javascript.jsx call EnableJavascript()
+augroup END
+'''
+
 # [[plugins]]
 # repo = 'Shougo/defx.nvim'
 
