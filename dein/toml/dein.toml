@@ -492,6 +492,10 @@ repo = 'cespare/vim-toml'
 [[plugins]]
 repo = 'kien/ctrlp.vim'
 
+# fFtT押下でジャンプ先をハイライトする
+[[plugins]]
+repo = 'unblevable/quick-scope'
+
 # カッコを自動的に閉じる
 [[plugins]]
 repo = 'cohama/lexima.vim'
