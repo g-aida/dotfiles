@@ -199,6 +199,9 @@ set nolist
 set relativenumber					" 相対行を表示
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
 
+" 補完ポップアップの設定
+set completeopt=menuone,noinsert
+
 " F1（ヘルプ）キーを無効に
 noremap <F1> <Nop>
 inoremap <F1> <Nop>
@@ -255,6 +258,13 @@ nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+
+augroup helpOpen
+	autocmd!
+	" ヘルプウィンドウを閉じる
+	autocmd FileType help nnoremap <buffer> q <C-w>c
+augroup END
+
 " バッファリストのファイル移動
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -281,9 +291,6 @@ nnoremap <silent> ]T :tlast<CR>
 
 " タグファイルを再構築する
 nnoremap <F5> :!ctags -R<CR>
-
-" 補完ポップアップの設定
-set completeopt=menuone,noinsert
 
 " アクティブなファイルが含まれているディレクトリを手早くフルパスに展開
 cnoremap <expr> %% (getcmdtype() == ':') ? expand('%:p:h').'/' : '%%'
@@ -314,6 +321,11 @@ inoremap <C-d> <Del>
 " xやsではヤンクしない
 nnoremap x "_x
 nnoremap s "_s
+
+" Tab補完
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 
 " hi SpecialKey guibg=#808080
 

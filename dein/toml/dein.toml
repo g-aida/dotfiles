@@ -12,9 +12,9 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 '''
 
-[[plugins]]
-# スニペット
-repo = 'SirVer/ultisnips'
+# [[plugins]]
+# # スニペット
+# repo = 'SirVer/ultisnips'
 
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -35,7 +35,7 @@ let g:lsp_signs_hint= {'text': ''}
 
 " debug
 let g:lsp_log_verbose = 0
-let g:lsp_log_file = expand('~/vimfiles/tmp/vim-lsp_log/vim-lsp.log')
+" let g:lsp_log_file = expand('~/vimfiles/tmp/vim-lsp_log/vim-lsp.log')
 
 " Java -> eclipse.jdt.ls
 if executable('java') && filereadable(expand('~/lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.5.300.v20190213-1655.jar'))
@@ -69,7 +69,7 @@ if executable('typescript-language-server')
 	augroup TypescriptLanguageServer
 		autocmd!
 		autocmd User lsp_setup call lsp#register_server({
-			\	'name': 'javascript support using typescript-language-server',
+			\	'name': 'typescript-language-server',
 			\	'cmd': {server_info->[
 			\			&shell,
 			\			&shellcmdflag,
@@ -82,7 +82,7 @@ if executable('typescript-language-server')
 "			\			'package.json'
 "			\		)
 			\		)},
-			\	'whitelist': ['javascript', 'javascript.jsx'],
+			\	'whitelist': ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx'],
 			\ })
 	augroup END
 endif
@@ -93,6 +93,12 @@ endif
 repo = 'prabirshrestha/asyncomplete.vim'
 hook_add = '''
 " let g:asyncomplete_log_file = expand('~/vimfiles/tmp/asyncomplete_log/asyncomplete.log')
+
+" Force refresh completion
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+" 補完時のプレビューウィンドウ表示
+set completeopt+=preview
 
 " 対象ファイルタイプを限定する
 " let g:asyncomplete_enable_for_all = 0
@@ -106,67 +112,67 @@ depends = [
 	'prabirshrestha/vim-lsp'
 ]
 
-[[plugins]]
-# 非同期コードチェック
-repo = 'w0rp/ale'
-hook_add = '''
-" linterを指定
-let g:ale_linters = {
-	\	'java' : [],
-	\	'javascript' : [],
-	\ }
+# [[plugins]]
+# # 非同期コードチェック
+# repo = 'w0rp/ale'
+# hook_add = '''
+# " linterを指定
+# let g:ale_linters = {
+# 	\	'java' : [],
+# 	\	'javascript' : [],
+# 	\ }
+#
+# " ワーニング・エラー間を素早くジャンプ
+# nmap <silent> [e <Plug>(ale_previous_wrap)
+# nmap <silent> ]e <Plug>(ale_next_wrap)
+#
+# " 左端のシンボルカラムを表示したままにする
+# let g:ale_sign_column_always = 1
+# " シンボルを変更する
+# let g:ale_sign_error   = ''
+# let g:ale_sign_warning = ''
+# '''
 
-" ワーニング・エラー間を素早くジャンプ
-nmap <silent> [e <Plug>(ale_previous_wrap)
-nmap <silent> ]e <Plug>(ale_next_wrap)
+# # javascriptのインデント・シンタックスハイライト
+# [[plugins]]
+# repo = 'pangloss/vim-javascript'
+# hook_add = '''
+# " Enables syntax highlighting for JSDocs.
+# let g:javascript_plugin_jsdoc = 0
+# " Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
+# let g:javascript_plugin_ngdoc = 0
+# " Enables syntax highlighting for Flow.
+# let g:javascript_plugin_flow = 0
+# " JSファイルを自動的に折りたたむ
+# " augroup javascript_folding
+# "     au!
+# "     au FileType javascript setlocal foldmethod=syntax
+# " augroup END
+# '''
 
-" 左端のシンボルカラムを表示したままにする
-let g:ale_sign_column_always = 1
-" シンボルを変更する
-let g:ale_sign_error   = ''
-let g:ale_sign_warning = ''
-'''
+# # JavaScript のシンタックス
+# [[plugins]]
+# repo = 'othree/yajs.vim'
 
-# javascriptのインデント・シンタックスハイライト
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-hook_add = '''
-" Enables syntax highlighting for JSDocs.
-let g:javascript_plugin_jsdoc = 0
-" Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
-let g:javascript_plugin_ngdoc = 0
-" Enables syntax highlighting for Flow.
-let g:javascript_plugin_flow = 0
-" JSファイルを自動的に折りたたむ
-" augroup javascript_folding
-"     au!
-"     au FileType javascript setlocal foldmethod=syntax
-" augroup END
-'''
-
-# JavaScript のシンタックス
-[[plugins]]
-repo = 'othree/yajs.vim'
-
-# JavaScript ライブラリのシンタックス
-[[plugins]]
-repo = 'othree/javascript-libraries-syntax.vim'
-hook_add = '''
-function! EnableJavascript()
-	" Setup used libraries
-	let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
-	let b:javascript_lib_use_jquery = 1
-	let b:javascript_lib_use_underscore = 0
-	let b:javascript_lib_use_react = 1
-	let b:javascript_lib_use_flux = 0
-	let b:javascript_lib_use_jasmine = 0
-	let b:javascript_lib_use_d3 = 1
-endfunction
-augroup EnableJavascript
-	autocmd!
-	autocmd FileType javascript,javascript.jsx call EnableJavascript()
-augroup END
-'''
+# # JavaScript ライブラリのシンタックス
+# [[plugins]]
+# repo = 'othree/javascript-libraries-syntax.vim'
+# hook_add = '''
+# function! EnableJavascript()
+# 	" Setup used libraries
+# 	let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
+# 	let b:javascript_lib_use_jquery = 1
+# 	let b:javascript_lib_use_underscore = 0
+# 	let b:javascript_lib_use_react = 1
+# 	let b:javascript_lib_use_flux = 0
+# 	let b:javascript_lib_use_jasmine = 0
+# 	let b:javascript_lib_use_d3 = 1
+# endfunction
+# augroup EnableJavascript
+# 	autocmd!
+# 	autocmd FileType javascript,javascript.jsx call EnableJavascript()
+# augroup END
+# '''
 
 # [[plugins]]
 # repo = 'Shougo/defx.nvim'
