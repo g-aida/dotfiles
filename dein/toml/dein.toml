@@ -507,7 +507,7 @@ augroup END
 [[plugins]]
 repo = 'cohama/lexima.vim'
 
-# 行単位での差分を表示する
+# 行選択し差分を表示する
 [[plugins]]
 repo = 'AndrewRadev/linediff.vim'
 
