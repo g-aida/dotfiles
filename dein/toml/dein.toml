@@ -472,6 +472,10 @@ let g:lightline#ale#indicator_ok       = ''
 let g:ale_echo_msg_format = '[%linter%] %s'
 '''
 
+# Vim起動時のスタートスクリーン表示
+[[plugins]]
+repo = 'mhinz/vim-startify'
+
 # ステータスラインをかっこよく
 # [[plugins]]
 # repo = 'vim-airline/vim-airline'
