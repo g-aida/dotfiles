@@ -503,6 +503,24 @@ augroup qs_colors
 augroup END
 '''
 
+# マークダウンをブラウザでプレビューする
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+hook_add = '''
+nmap p;; <Plug>MarkdownPreview
+'''
+hook_post_update = '''
+	if dein#util#_is_windows()
+		let cmd = 'cd app & yarn install'
+	elseif dein#util#_is_cygwin()
+		let cmd = 'cd app & yarn install'
+	else
+		let cmd = ''
+	endif
+	let g:dein#plugin.build = cmd
+'''
+
 # カッコを自動的に閉じる
 [[plugins]]
 repo = 'cohama/lexima.vim'
