@@ -507,6 +507,10 @@ augroup END
 [[plugins]]
 repo = 'cohama/lexima.vim'
 
+# 行単位での差分を表示する
+[[plugins]]
+repo = 'AndrewRadev/linediff.vim'
+
 # [[plugins]]
 # repo = 'roxma/vim-hug-neovim-rpc'
 # on_if = '!has("nvim")'
