@@ -490,7 +490,7 @@ repo = 'cespare/vim-toml'
 
 # ファイルをあいまい検索
 [[plugins]]
-repo = 'kien/ctrlp.vim'
+repo = 'ctrlpvim/ctrlp.vim'
 
 # fFtT押下でジャンプ先をハイライトする
 [[plugins]]
