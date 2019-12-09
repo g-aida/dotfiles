@@ -475,6 +475,20 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 # Vim起動時のスタートスクリーン表示
 [[plugins]]
 repo = 'mhinz/vim-startify'
+hook_add = '''
+let g:startify_bookmarks = [
+	\ {'p': '~/GitHub/WordPress/page-home.php'},
+	\ ]
+
+let g:startify_lists = [
+	\ { 'type': 'files',     'header': ['   MRU']            },
+	\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+	\ { 'type': 'sessions',  'header': ['   Sessions']       },
+	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+	\ { 'type': 'commands',  'header': ['   Commands']       },
+	\ ]
+
+'''
 
 # ステータスラインをかっこよく
 # [[plugins]]
