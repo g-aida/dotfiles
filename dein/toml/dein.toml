@@ -477,6 +477,7 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 repo = 'mhinz/vim-startify'
 hook_add = '''
 let g:startify_bookmarks = [
+	\ {'d': '~/GitHub/dotfiles/dein/toml/dein.toml'},
 	\ {'p': '~/GitHub/WordPress/page-home.php'},
 	\ ]
 
