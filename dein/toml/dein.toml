@@ -507,6 +507,27 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'cespare/vim-toml'
 
+# Vimでfzfを使用する
+[[plugins]]
+repo = 'junegunn/fzf'
+hook_post_update = '''
+	if has('win32')
+		let cmd = '~/GitHub/fzf/install'
+	endif
+	let g:dein#plugin.build = cmd
+'''
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'junegunn/fzf'
+hook_add = '''
+command! -bang -nargs=* Rg
+	\ call fzf#vim#grep(
+	\   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+	\   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
+'''
+
 # ファイルをあいまい検索
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
