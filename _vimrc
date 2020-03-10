@@ -372,7 +372,7 @@ function! ProfileCursorMove() abort
 		autocmd CursorHold <buffer> profile pause | q
 	augroup END
 
-	for i in range(100)
+	for i in range(500)
 		call feedkeys('j')
 	endfor
 endfunction

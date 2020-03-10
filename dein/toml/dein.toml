@@ -502,8 +502,13 @@ let g:startify_lists = [
 # repo = 'vim-airline/vim-airline'
 
 # ソースコード中のカラーをプレビューする
+# ※遅い
+# [[plugins]]
+# repo = 'ap/vim-css-color'
+
+# ソースコード中のカラーをプレビューする
 [[plugins]]
-repo = 'ap/vim-css-color'
+repo = 'gko/vim-coloresque'
 
 # 行末の不要な空白文字を可視化
 [[plugins]]
@@ -551,6 +556,7 @@ repo = 'ctrlpvim/ctrlp.vim'
 [[plugins]]
 repo = 'unblevable/quick-scope'
 hook_add = '''
+let g:qs_max_chars=120
 augroup qs_colors
 	autocmd!
 	autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
