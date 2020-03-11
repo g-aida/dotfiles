@@ -497,6 +497,13 @@ let g:startify_lists = [
 
 '''
 
+# カーソル移動をしていないときのみカーソル行を表示する
+[[plugins]]
+repo = 'delphinus/vim-auto-cursorline'
+hook_add = '''
+let g:auto_cursorline_wait_ms = 500
+'''
+
 # ステータスラインをかっこよく
 # [[plugins]]
 # repo = 'vim-airline/vim-airline'
