@@ -596,6 +596,17 @@ repo = 'cohama/lexima.vim'
 [[plugins]]
 repo = 'AndrewRadev/linediff.vim'
 
+# テキストオブジェクトを自作で定義する
+[[plugins]]
+repo = 'kana/vim-textobj-user'
+
+# バッファ全体
+[[plugins]]
+repo = 'kana/vim-textobj-entire'
+depends = [
+	'kana/vim-textobj-user'
+]
+
 # [[plugins]]
 # repo = 'roxma/vim-hug-neovim-rpc'
 # on_if = '!has("nvim")'
