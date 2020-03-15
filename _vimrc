@@ -243,7 +243,7 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
 " 12<Enter>を押して12行目に移動する
-nnoremap <CR> G
+" nnoremap <CR> G
 
 " ヤンク後にヤンク領域の下部に移動
 vnoremap <silent> y y']
@@ -321,6 +321,13 @@ inoremap <C-d> <Del>
 " xやsではヤンクしない
 nnoremap x "_x
 nnoremap s "_s
+
+" クリップボードの値をヤンクレジスタにも反映する
+augroup SysRegToYankReg
+	autocmd!
+	" ヘルプウィンドウを閉じる
+	autocmd FocusGained * let @0 = getreg('*')
+augroup END
 
 " Tab補完
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"

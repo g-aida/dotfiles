@@ -91,7 +91,7 @@ hook_add='''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
-let g:lsp_settings_servers_dir = '~/lsp'
+" let g:lsp_settings_servers_dir = '~/lsp'
 '''
 
 [[plugins]]
@@ -600,9 +600,27 @@ repo = 'AndrewRadev/linediff.vim'
 [[plugins]]
 repo = 'kana/vim-textobj-user'
 
-# バッファ全体
+# バッファ全体(ie, ae)
 [[plugins]]
 repo = 'kana/vim-textobj-entire'
+depends = [
+	'kana/vim-textobj-user'
+]
+# 現在行(il, al)
+[[plugins]]
+repo = 'kana/vim-textobj-line'
+depends = [
+	'kana/vim-textobj-user'
+]
+# カッコなどの囲み文字ブロック内(ib, ab)
+[[plugins]]
+repo = 'osyo-manga/vim-textobj-multiblock'
+depends = [
+	'kana/vim-textobj-user'
+]
+# 矩形(cIw, <C-v>iw)
+[[plugins]]
+repo = 'osyo-manga/vim-textobj-blockwise'
 depends = [
 	'kana/vim-textobj-user'
 ]
