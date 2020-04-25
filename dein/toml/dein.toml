@@ -91,7 +91,7 @@ hook_add='''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
-" let g:lsp_settings_servers_dir = '~/lsp'
+let g:lsp_settings_servers_dir = '~/vimfiles/lsp-searvers'
 '''
 
 [[plugins]]
@@ -637,6 +637,9 @@ depends = [
 [[plugins]]
 repo = 'thinca/vim-ref'
 
+# Vimの変数を整形して出力する
+repo = 'thinca/vim-prettyprint'
+
 # Vimチートシートを別ペインで表示する
 [[plugins]]
 repo = 'reireias/vim-cheatsheet'
@@ -655,6 +658,10 @@ let g:cheatsheet#cheat_file = '$HOME/.vim_cheatsheet.md'
 # ランダムな時刻をINSERTする
 [[plugins]]
 repo = 'kebiishi/random-date'
+
+# Killer sheep
+[[plugins]]
+repo = 'vim/killersheep'
 
 # ディレクトリごとに設定ファイルを用意する
 [[plugins]]

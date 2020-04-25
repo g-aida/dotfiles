@@ -14,7 +14,7 @@ source $VIMRUNTIME/defaults.vim
 
 " GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
 if has('win64')
-	set shell=C:\Windows\System32\cmd.exe
+	set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 	set shellcmdflag=/c
 endif
 
@@ -97,7 +97,7 @@ augroup grlcd
 	" Vim起動時はとりあえずホームディレクトリに移動
 	autocmd VimEnter cd ~
 	" 編集ファイルディレクトリに変更
-	autocmd BufEnter * lcd %:p:h
+  autocmd BufEnter * if &buftype!=# 'terminal' | lcd %:p:h | endif
 	" 上位階層に.local.vimrcがあればそれをloadしてディレクトリを変更
 	autocmd VimEnter,BufEnter,BufNewFile,BufReadPost *
 				\	call localrc#load(g:localrc_filename)
@@ -346,6 +346,35 @@ noremap! <3-MiddleMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
 
+"------------------------------------------------
+" ":terminal 設定
+" " Insertモード時のprefix
+set termwinkey=<C-g>
+"
+" Insertモードから抜ける
+tnoremap <C-[> <C-g><S-n>
+
+" ターミナルウィンドウにfiletypeを設定する
+function! s:bufnew()
+  if &buftype == 'terminal' && &filetype == ''
+    set filetype=terminal
+  endif
+endfunction
+
+" :terminal実行直後に実行されるCB
+function! s:filetype()
+endfunction
+
+augroup my-terminal
+  autocmd!
+  autocmd BufEnter * call timer_start(0, { -> s:bufnew() })
+  autocmd FileType terminal call s:filetype()
+augroup END
+
+" popup windowでターミナルを開く
+command! Terminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })
+
+"------------------------------------------------
 " vp doesn't replace paste buffer
 function! RestoreRegister()
 	let @" = s:restore_reg
@@ -379,7 +408,7 @@ function! ProfileCursorMove() abort
 		autocmd CursorHold <buffer> profile pause | q
 	augroup END
 
-	for i in range(500)
+	for i in range(100)
 		call feedkeys('j')
 	endfor
 endfunction
