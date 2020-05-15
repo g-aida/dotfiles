@@ -15,6 +15,7 @@ source $VIMRUNTIME/defaults.vim
 " GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
 if has('win64')
 	set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  " set shell=C:\Users\genki\AppData\Local\Atlassian\SourceTree\git_local\bin\bash.exe
 	set shellcmdflag=/c
 endif
 
@@ -197,7 +198,7 @@ augroup END
 set nolist
 
 set relativenumber					" 相対行を表示
-nnoremap <F3> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
+nnoremap <F4> :<C-u>setlocal relativenumber!<CR> :<C-u>setlocal number<CR>
 
 " 補完ポップアップの設定
 set completeopt=menuone,noinsert
@@ -258,6 +259,9 @@ nnoremap <Space>. :<C-u>tabnew ~/_vimrc<CR>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+" ファイルクローズコマンドを無効化する
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
 
 augroup helpOpen
 	autocmd!
@@ -373,6 +377,7 @@ augroup END
 
 " popup windowでターミナルを開く
 command! Terminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })
+command! Terminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })
 
 "------------------------------------------------
 " vp doesn't replace paste buffer
@@ -416,6 +421,30 @@ endfunction
 " -----------------------------------------------
 "  TODO
 "  dein_lazy.tomlが読み込めるようになったら削除
+"
+" 「vim-lsp」設定
+" highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+highlight link lspReference Visual
+" vim-lspプラグインでのコマンドプレフィックス
+nnoremap [vim-lsp] <Nop>
+nmap <Space>l [vim-lsp]
+" 定義場所にジャンプする。
+nnoremap [vim-lsp]d :<C-u>LspDefinition<CR>
+" ファイルをフォーマットする。
+nnoremap [vim-lsp]f :<C-u>LspDocumentFormat<CR>
+" カーソル下のシンボル情報をポップアップに表示する。
+nnoremap [vim-lsp]h :<C-u>LspHover<CR>
+" カーソル下のシンボルをリネームする。
+nnoremap [vim-lsp]r :<C-u>LspRename<CR>
+" クラスの継承関係を表示する。
+nnoremap [vim-lsp]i :<C-u>LspTypeHierarchy<CR>
+" 前後のエラーにジャンプする。
+nnoremap <silent> [e :<C-u>LspPreviousError<CR>
+nnoremap <silent> ]e :<C-u>LspNextError<CR>
+" 前後のリファレンスにジャンプする。
+nnoremap <silent> [r :<C-u>LspPreviousReference<CR>
+nnoremap <silent> ]r :<C-u>LspNextReference<CR>
+
 
 
 
