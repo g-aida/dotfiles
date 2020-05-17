@@ -70,20 +70,20 @@ depends = [
 	'prabirshrestha/vim-lsp'
 ]
 
-# # スニペット
-# [[plugins]]
-# repo = 'Shougo/neosnippet.vim'
+# スニペット
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
 
 # 標準スニペットライブラリ
-# [[plugins]]
-# repo = 'Shougo/neosnippet-snippets'
-# depends = 'Shougo/neosnippet.vim'
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+depends = 'Shougo/neosnippet.vim'
 
-# [[plugins]]
-# repo = 'thomasfaingnaert/vim-lsp-snippets'
-#
-# [[plugins]]
-# repo = 'thomasfaingnaert/vim-lsp-neosnippet'
+[[plugins]]
+repo = 'thomasfaingnaert/vim-lsp-snippets'
+
+[[plugins]]
+repo = 'thomasfaingnaert/vim-lsp-neosnippet'
 
 # [[plugins]]
 # # 非同期コードチェック

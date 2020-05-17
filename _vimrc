@@ -14,7 +14,8 @@ source $VIMRUNTIME/defaults.vim
 
 " GitBashから起動される場合もあるので、明示的にコマンドプロンプトを指定
 if has('win64')
-	set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  set shell=C:\Windows\System32\cmd.exe
+	" set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
   " set shell=C:\Users\genki\AppData\Local\Atlassian\SourceTree\git_local\bin\bash.exe
 	set shellcmdflag=/c
 endif
@@ -49,6 +50,9 @@ autocmd BufAdd .vimprojects silent! %foldopen!
 if &compatible
 	set nocompatible
 endif
+
+" ログ出力
+" let g:dein#install_log_filename = expand('~/vimfiles/tmp/dein_log/dein.log')
 
 " プラグインがインストールされるディレクトリ
 let s:dein_dir = expand($HOME . '/.cache/dein')
