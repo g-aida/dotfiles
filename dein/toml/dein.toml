@@ -542,7 +542,8 @@ repo = 'ctrlpvim/ctrlp.vim'
 [[plugins]]
 repo = 'unblevable/quick-scope'
 hook_add = '''
-let g:qs_max_chars=120
+let g:qs_lazy_highlight = 1
+let g:qs_max_chars=60
 augroup qs_colors
 	autocmd!
 	autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
