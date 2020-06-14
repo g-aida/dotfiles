@@ -190,6 +190,9 @@ if (has("termguicolors"))
 endif
 syntax enable
 colorscheme gruvbox
+set background=light
+
+let g:gruvbox_contrast_light = 'soft'
 '''
 
 # Emmet記法で爆速開発
@@ -546,8 +549,8 @@ let g:qs_lazy_highlight = 1
 let g:qs_max_chars=60
 augroup qs_colors
 	autocmd!
-	autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-	autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+	autocmd ColorScheme * highlight QuickScopePrimary guifg='#85ba5f' gui=underline ctermfg=155 cterm=underline
+	autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fdddd' gui=underline ctermfg=81 cterm=underline
 augroup END
 '''
 
