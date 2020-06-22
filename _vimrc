@@ -129,6 +129,9 @@ set ignorecase						" 検索パターンに大文字小文字を区別しない
 set smartcase						" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch						" 検索結果をハイライト
 
+set splitbelow          " 水平分割による新しいウィンドウを現在のウィンドウの下に作る
+set splitright          " 垂直による新しいウィンドウを現在のウィンドウの右に作る
+
 set laststatus=2					" 常にステータス行を表示する
 set cmdheight=2						" hit-enter回数を減らすのが目的
 if !has('gui_running')				" gvimではない？ (== 端末)
@@ -333,7 +336,6 @@ nnoremap s "_s
 " クリップボードの値をヤンクレジスタにも反映する
 augroup SysRegToYankReg
 	autocmd!
-	" ヘルプウィンドウを閉じる
 	autocmd FocusGained * let @0 = getreg('*')
 augroup END
 
@@ -355,10 +357,15 @@ noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
 
 "------------------------------------------------
-" ":terminal 設定
-" " Insertモード時のprefix
+":terminal 設定
+" サイズ指定
+set termwinsize=7x0
+" Insertモード時のprefix
 set termwinkey=<C-g>
-"
+
+" ターミナルモードで貼り付け
+tnoremap <C-T> <C-g>""
+
 " Insertモードから抜ける
 tnoremap <C-[> <C-g><S-n>
 
@@ -381,19 +388,24 @@ augroup END
 
 " popup windowでターミナルを開く
 command! Terminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })
-command! Terminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })
 
 "------------------------------------------------
 " vp doesn't replace paste buffer
 function! RestoreRegister()
 	let @" = s:restore_reg
+	let @* = s:restore_reg
 	return ''
 endfunction
-function! s:Repl()
+function! s:pRepl()
 	let s:restore_reg = @"
 	return "p@=RestoreRegister()\<cr>"
 endfunction
-vmap <silent> <expr> p <sid>Repl()
+function! s:PRepl()
+	let s:restore_reg = @"
+	return "P@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>pRepl()
+vmap <silent> <expr> P <sid>PRepl()
 
 " -----------------------------------------------
 " カーソル移動が遅いときにprofileして原因を調べる。
