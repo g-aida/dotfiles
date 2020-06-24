@@ -364,7 +364,7 @@ set termwinsize=7x0
 set termwinkey=<C-g>
 
 " ターミナルモードで貼り付け
-tnoremap <C-T> <C-g>""
+tnoremap <C-T> <C-g>"*
 
 " Insertモードから抜ける
 tnoremap <C-[> <C-g><S-n>
