@@ -585,6 +585,13 @@ repo = 'cohama/lexima.vim'
 # 行選択し差分を表示する
 [[plugins]]
 repo = 'AndrewRadev/linediff.vim'
+hook_add = '''
+call lexima#add_rule({'char': '<C-h>', 'at': '"""\%#"""', 'input': '<BS><BS><BS>', 'delete': 3})
+call lexima#add_rule({'char': '<C-h>', 'at': "'\\%#'", 'delete': 1})
+call lexima#add_rule({'char': '<C-h>', 'at': '"\%#"', 'delete': 1})
+call lexima#add_rule({'char': '<C-h>', 'at': '`\%#`', 'delete': 1})
+call lexima#add_rule({'char': '<C-h>', 'at': '```\%#```', 'input': '<BS><BS><BS>', 'delete': 3})
+'''
 
 # テキストオブジェクトを自作で定義する
 [[plugins]]
