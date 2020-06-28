@@ -81,6 +81,7 @@ if dein#load_state(s:dein_dir)
 
 	call dein#end()
 	call dein#save_state()
+
 endif
 
 filetype plugin indent on
@@ -90,6 +91,9 @@ syntax enable
 if dein#check_install()
 	call dein#install()
 endif
+
+" Vim起動時に、hook_post_sourceを実行する
+autocmd VimEnter * call dein#call_hook('post_source')
 
 "===============================================================================
 " 設定の追加はこの行以降でおこなうこと！
@@ -460,10 +464,6 @@ nnoremap <silent> ]e :<C-u>LspNextError<CR>
 " 前後のリファレンスにジャンプする。
 nnoremap <silent> [r :<C-u>LspPreviousReference<CR>
 nnoremap <silent> ]r :<C-u>LspNextReference<CR>
-
-
-
-
 
 " -----------------------------------------------
 " Load all plugins now.

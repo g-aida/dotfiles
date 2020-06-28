@@ -476,7 +476,14 @@ let g:startify_lists = [
 	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 	\ { 'type': 'commands',  'header': ['   Commands']       },
 	\ ]
-
+'''
+hook_post_source = '''
+" 新規タブで起動する
+function! MyStartify()
+    :tabe
+    :call startify#insane_in_the_membrane(0)
+endfunction
+command! -nargs=0 -bar Startify :call MyStartify()
 '''
 
 # カーソル移動をしていないときのみカーソル行を表示する
