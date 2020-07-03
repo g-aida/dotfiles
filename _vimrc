@@ -360,6 +360,13 @@ noremap! <3-MiddleMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 noremap! <4-MiddleMouse> <Nop>
 
+" ダイアログを開き名前を付けて保存
+function SaveasFunc()
+  browse confirm saveas
+  cd %:p:h
+endfunction
+command Saveas call SaveasFunc()
+
 "------------------------------------------------
 ":terminal 設定
 " サイズ指定
