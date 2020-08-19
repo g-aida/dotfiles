@@ -28,6 +28,8 @@ let g:lsp_signs_information= {'text': ''}
 let g:lsp_signs_hint= {'text': ''}
 " カーソル下のエラー内容を表示する。
 let g:lsp_diagnostics_echo_cursor = 1
+" let g:lsp_diagnostics_echo_delay = 3000
+" let g:lsp_diagnostics_float_cursor = 1
 
 " メソッドの用法を表示する。
 let g:lsp_signature_help_enabled = 1
@@ -331,7 +333,8 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 
 # 複数カーソル
 [[plugins]]
-repo = 'terryma/vim-multiple-cursors'
+repo = 'mg979/vim-visual-multi'
+# repo = 'terryma/vim-multiple-cursors' #Obsolete
 
 # ステータスラインをいい感じにする
 [[plugins]]

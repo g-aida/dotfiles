@@ -370,7 +370,7 @@ command Saveas call SaveasFunc()
 "------------------------------------------------
 ":terminal 設定
 " サイズ指定
-set termwinsize=7x0
+set termwinsize=10x0
 " Insertモード時のprefix
 set termwinkey=<C-g>
 
@@ -471,6 +471,13 @@ nnoremap <silent> ]e :<C-u>LspNextError<CR>
 " 前後のリファレンスにジャンプする。
 nnoremap <silent> [r :<C-u>LspPreviousReference<CR>
 nnoremap <silent> ]r :<C-u>LspNextReference<CR>
+" " 保存時にエラーチェックをする。
+" augroup diagnosticInWriting
+" 	autocmd!
+" 	autocmd BufWritePost * let g:lsp_diagnostics_enabled = 1
+" 	autocmd BufWritePost * LspDocumentDiagnostics
+" 	autocmd BufWritePost * let g:lsp_diagnostics_enabled = 0
+" augroup END
 
 " -----------------------------------------------
 " Load all plugins now.
