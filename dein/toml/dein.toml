@@ -236,6 +236,21 @@ let g:closetag_emptyTags_caseSensitive = 1
 "let g:closetag_close_shortcut = '<leader>>'
 '''
 
+# 超軽量ファイラー
+# [[plugins]]
+# repo = 'mattn/vim-molder'
+# hook_add = '''
+# let g:molder_show_hidden = 1
+# '''
+
+# mattn/vim-molderのアドオン
+# [[plugins]]
+# repo = 'mattn/vim-molder-operations'
+
+# asynchronous tree viewer
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+
 # カレントディレクトリのファイル一覧を表示
 [[plugins]]
 repo = 'scrooloose/nerdtree'
