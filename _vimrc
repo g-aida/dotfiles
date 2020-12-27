@@ -120,7 +120,7 @@ set number							" 行番号を表示
 set cursorline						" カーソルラインをハイライト
 
 " set scrolloff=999					" カーソル行が常に画面中央に表示
-" set scrolloff=0						" defaults.vimで5が指定されているため
+set scrolloff=0						" defaults.vimで5が指定されているため
 set tabstop=4						" 画面上でタブ文字が占める幅
 set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent						" 改行時に前の行のインデントを継続する
