@@ -119,7 +119,7 @@ set whichwrap=b,s,h,l,<,>,[,],~		" カーソルの左右移動で行末から次
 set number							" 行番号を表示
 set cursorline						" カーソルラインをハイライト
 
-set scrolloff=999					" カーソル行が常に画面中央に表示
+" set scrolloff=999					" カーソル行が常に画面中央に表示
 " set scrolloff=0						" defaults.vimで5が指定されているため
 set tabstop=4						" 画面上でタブ文字が占める幅
 set softtabstop=4					" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
@@ -167,10 +167,12 @@ set belloff=all						" ビープ音を消去
 
 set hidden							" 保存しなくてもバッファ切り替え可能
 
-" Windows用の日本語入力固定モードの設定
-" 挿入モード終了時にIME状態を保存しない
+" <C-[>で挿入モードを抜ける
 inoremap <silent> <ESC> <ESC>
 inoremap <silent> <C-[> <ESC>
+
+" Windows用の日本語入力固定モードの設定
+" 挿入モード終了時にIME状態を保存しない
 " fコマンドでのIMEをOFFにする
 let g:IMState=0
 autocmd InsertEnter * let &iminsert = g:IMState
