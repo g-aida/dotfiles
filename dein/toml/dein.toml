@@ -250,13 +250,64 @@ let g:closetag_emptyTags_caseSensitive = 1
 # asynchronous tree viewer
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
+hook_add = '''
+" let g:fern#loglevel = -1
+" <C-e>でProject drawerを開き、現在のファイル名にフォーカスする。
+nnoremap <silent><C-e> :<C-u>Fern . -drawer -reveal=%<CR>
+
+function! FernInit() abort
+  nmap <buffer><expr>
+	  \ <Plug>(fern-my-open-expand-collapse)
+	  \	fern#smart#leaf(
+	  \	  "\<Plug>(fern-action-open:select)",
+	  \	  "\<Plug>(fern-action-expand)",
+	  \	  "\<Plug>(fern-action-collapse)",
+	  \ )
+  nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> n <Plug>(fern-action-new-path)
+  nmap <buffer> d <Plug>(fern-action-remove)
+  nmap <buffer> m <Plug>(fern-action-move)
+  nmap <buffer> M <Plug>(fern-action-rename)
+  nmap <buffer> h <Plug>(fern-action-hidden-toggle)
+  nmap <buffer> r <Plug>(fern-action-reload)
+  nmap <buffer> b <Plug>(fern-action-open:split)
+  nmap <buffer> v <Plug>(fern-action-open:vsplit)
+endfunction
+
+augroup FurnGroup
+  autocmd!
+  autocmd FileType fern call FernInit()
+augroup END
+'''
+
+# A plugin for fern.vim to make the fern.vim as a default file explorer instead of Netrw.
+[[plugins]]
+repo = 'lambdalisue/fern-hijack.vim'
+depends = [
+	'lambdalisue/fern.vim'
+]
+
+# A simplified version of vim-devicons which does NOT provide any 3rd party integrations in itself. In otherwords, it is a fundemental plugin to handle Nerd Fonts from Vim.
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+# fern.vim plugin which add file type icons through lambdalisue/nerdfont.vim.
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = [
+	'lambdalisue/fern.vim'
+]
+hook_add = '''
+let g:fern#renderer = "nerdfont"
+'''
 
 # カレントディレクトリのファイル一覧を表示
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
 " <C-e>でツリーを開く
-nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
+" nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
 
 " ブックマークを初期表示
 let g:NERDTreeShowBookmarks=1
@@ -283,14 +334,14 @@ let g:NERDTreeDirArrowCollapsible = '▼'
 '''
 
 # タブページ使用時にNERDTreeを便利にする
-[[plugins]]
-repo = 'jistr/vim-nerdtree-tabs'
-hook_add = '''
-" NERDTreeToggleの代わりにNERDTreeTabsToggleを呼ぶようにする
-" nnoremap <silent><C-e> :<C-u><Plug>NERDTreeTabsToggle<CR>
-map <C-e> <Plug>NERDTreeTabsToggle<CR>
-let g:nerdtree_tabs_open_on_gui_startup = 0
-'''
+#[[plugins]]
+#repo = 'jistr/vim-nerdtree-tabs'
+#hook_add = '''
+#" NERDTreeToggleの代わりにNERDTreeTabsToggleを呼ぶようにする
+#" nnoremap <silent><C-e> :<C-u><Plug>NERDTreeTabsToggle<CR>
+#map <C-e> <Plug>NERDTreeTabsToggle<CR>
+#let g:nerdtree_tabs_open_on_gui_startup = 0
+#'''
 
 # NERDTreeのシンタックスハイライト
 [[plugins]]

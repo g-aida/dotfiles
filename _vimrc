@@ -106,7 +106,8 @@ augroup grlcd
 	" Vim起動時はとりあえずホームディレクトリに移動
 	autocmd VimEnter cd ~
 	" 編集ファイルディレクトリに変更
-  autocmd BufEnter * if &buftype!=# 'terminal' | lcd %:p:h | endif
+  " ⇒fern.vim使用時にバグるのでコメントアウト
+  " autocmd BufEnter * if &buftype!=# 'terminal' | lcd %:p:h | endif
 	" 上位階層に.local.vimrcがあればそれをloadしてディレクトリを変更
 	autocmd VimEnter,BufEnter,BufNewFile,BufReadPost *
 				\	call localrc#load(g:localrc_filename)
