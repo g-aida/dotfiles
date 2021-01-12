@@ -265,11 +265,12 @@ function! FernInit() abort
 	  \ )
   nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
   nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
-  nmap <buffer> n <Plug>(fern-action-new-path)
+  nmap <buffer> p <Plug>(fern-action-new-path)
+  nmap <buffer> P <Plug>(fern-action-new-file)
   nmap <buffer> d <Plug>(fern-action-remove)
   nmap <buffer> m <Plug>(fern-action-move)
   nmap <buffer> M <Plug>(fern-action-rename)
-  nmap <buffer> h <Plug>(fern-action-hidden-toggle)
+  nmap <buffer> h <Plug>(fern-action-hidden:toggle)
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> b <Plug>(fern-action-open:split)
   nmap <buffer> v <Plug>(fern-action-open:vsplit)
@@ -302,36 +303,43 @@ hook_add = '''
 let g:fern#renderer = "nerdfont"
 '''
 
-# カレントディレクトリのファイル一覧を表示
+# fern-git-status is a fern.vim plugin to add git status on node's badge asynchronously.
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-hook_add = '''
-" <C-e>でツリーを開く
-" nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
+repo = 'lambdalisue/fern-git-status.vim'
+depends = [
+	'lambdalisue/fern.vim'
+]
 
-" ブックマークを初期表示
-let g:NERDTreeShowBookmarks=1
-
-" 隠しファイルを表示する
-let NERDTreeShowHidden = 1
-
-" Vimを起動したときに自動でNERDTreeを表示
-" autocmd vimenter * NERDTree
-
-" ファイル名が指定された状態でVimが起動された場合はNERDTreeを起動しない
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" 他のバッファをすべて閉じたときにNERDTreeが開いていたらNERDTreeも一緒に閉じる
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" ディレクトリ表示記号を変更する
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable  = '▶'
-let g:NERDTreeDirArrowCollapsible = '▼'
-
-'''
+# カレントディレクトリのファイル一覧を表示
+#[[plugins]]
+#repo = 'scrooloose/nerdtree'
+#hook_add = '''
+#" <C-e>でツリーを開く
+#" nnoremap <silent><C-e> :<C-u>NERDTreeToggle<CR>
+#
+#" ブックマークを初期表示
+#let g:NERDTreeShowBookmarks=1
+#
+#" 隠しファイルを表示する
+#let NERDTreeShowHidden = 1
+#
+#" Vimを起動したときに自動でNERDTreeを表示
+#" autocmd vimenter * NERDTree
+#
+#" ファイル名が指定された状態でVimが起動された場合はNERDTreeを起動しない
+#" autocmd StdinReadPre * let s:std_in=1
+#" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+#" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+#
+#" 他のバッファをすべて閉じたときにNERDTreeが開いていたらNERDTreeも一緒に閉じる
+#autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+#
+#" ディレクトリ表示記号を変更する
+#let g:NERDTreeDirArrows = 1
+#let g:NERDTreeDirArrowExpandable  = '▶'
+#let g:NERDTreeDirArrowCollapsible = '▼'
+#
+#'''
 
 # タブページ使用時にNERDTreeを便利にする
 #[[plugins]]
@@ -343,35 +351,35 @@ let g:NERDTreeDirArrowCollapsible = '▼'
 #let g:nerdtree_tabs_open_on_gui_startup = 0
 #'''
 
-# NERDTreeのシンタックスハイライト
-[[plugins]]
-repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
-hook_add = '''
-" アイコンだけでなくファイル名もハイライトする
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-
-" フォルダをハイライトする
-let g:NERDTreeHighlightFolders = 1
-let g:NERDTreeHighlightFoldersFullName = 1
-
-" ファイルアイコン
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']  = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']   = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.vimrc']     = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gvimrc']    = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_vimrc']     = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_gvimrc']    = ''
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*vimrc.*'] = ''
-'''
+## NERDTreeのシンタックスハイライト
+#[[plugins]]
+#repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+#hook_add = '''
+#" アイコンだけでなくファイル名もハイライトする
+#let g:NERDTreeFileExtensionHighlightFullName = 1
+#let g:NERDTreeExactMatchHighlightFullName = 1
+#let g:NERDTreePatternMatchHighlightFullName = 1
+#
+#" フォルダをハイライトする
+#let g:NERDTreeHighlightFolders = 1
+#let g:NERDTreeHighlightFoldersFullName = 1
+#
+#" ファイルアイコン
+#let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+#let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css']  = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md']   = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim']  = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.vimrc']     = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gvimrc']    = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_vimrc']     = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['_gvimrc']    = ''
+#let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {}
+#let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*vimrc.*'] = ''
+#'''
 
 # 複数行コメントアウト
 [[plugins]]
