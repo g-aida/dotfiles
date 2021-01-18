@@ -266,7 +266,7 @@ function! FernInit() abort
   nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
   nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
   nmap <buffer> p <Plug>(fern-action-new-path)
-  nmap <buffer> P <Plug>(fern-action-new-file)
+  nmap <buffer> F <Plug>(fern-action-new-file)
   nmap <buffer> d <Plug>(fern-action-remove)
   nmap <buffer> m <Plug>(fern-action-move)
   nmap <buffer> M <Plug>(fern-action-rename)
@@ -274,6 +274,7 @@ function! FernInit() abort
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> b <Plug>(fern-action-open:split)
   nmap <buffer> v <Plug>(fern-action-open:vsplit)
+  nmap <buffer> x <Plug>(fern-action-collapse)
 endfunction
 
 augroup FurnGroup
