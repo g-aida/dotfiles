@@ -190,7 +190,7 @@ nnoremap <silent><Esc><Esc> :<C-u>let @/ = ''<CR>
 " augroup END
 
 " grepコマンドで実行される外部コマンドを指定
-let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.svn --exclude=tags"
+let &grepprg="grep -rnIH --exclude=.git --exclude-dir=.hg --exclude-dir=.git --exclude=tags"
 
 " :grep 等でquickfixウィンドウを開く (:lgrep 等でlocationlistウィンドウを開く)
 " vimgrep, grep, lgrepそれぞれに対応
