@@ -374,7 +374,7 @@ command Saveas call SaveasFunc()
 "------------------------------------------------
 ":terminal 設定
 " サイズ指定
-set termwinsize=10x0
+" set termwinsize=10x0
 " Insertモード時のprefix
 set termwinkey=<C-g>
 
