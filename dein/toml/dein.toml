@@ -183,18 +183,31 @@ repo = 'tpope/vim-abolish'
 # colorscheme tender
 # '''
 
-# レトロなカラースキーム
-[[plugins]]
-repo = 'morhetz/gruvbox'
-hook_add = '''
-if (has("termguicolors"))
-	set termguicolors
-endif
-syntax enable
-colorscheme gruvbox
-set background=light
+## レトロなカラースキーム
+# 2021/01/23 ctrlpのC-k, C-lの遅延を起こすので廃止
+#[[plugins]]
+#repo = 'morhetz/gruvbox'
+#hook_add = '''
+#"if (has("termguicolors"))
+#"	set termguicolors
+#"endif
+#syntax enable
+#colorscheme gruvbox
+#set background=light
+#
+#"let g:gruvbox_contrast_light = 'soft'
+#'''
 
-let g:gruvbox_contrast_light = 'soft'
+[[plugins]]
+repo = 'sonph/onehalf'
+hook_add = '''
+syntax on
+set t_Co=256
+set cursorline
+" colorscheme onehalflight
+colorscheme onehalfdark
+" let g:airline_theme='onehalfdark'
+let g:lightline = { 'colorscheme': 'onehalfdark' }
 '''
 
 # Emmet記法で爆速開発
@@ -416,7 +429,8 @@ repo = 'mg979/vim-visual-multi'
 repo = 'itchyny/lightline.vim'
 depends = [
 	# 'jacoborus/tender.vim',
-	'morhetz/gruvbox',
+	# 'morhetz/gruvbox',
+	'sonph/onehalf',
 	'maximbaz/lightline-ale'
 ]
 hook_add = '''

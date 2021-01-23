@@ -44,6 +44,10 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 nmap <silent> <Leader>p :Project<CR>
 " フォールディングを展開した状態で、プロジェクトを開く
 autocmd BufAdd .vimprojects silent! %foldopen!
+"
+"===============================================================================
+" Gitリポジトリの階層が特殊でdeinでキャッシュされないので明示的にロードする。
+execute 'set runtimepath+=' . fnamemodify(expand($HOME . '/.cache/dein/repos/github.com/sonph/onehalf/vim'), ":p:h")
 
 "===============================================================================
 " dein.vimの設定開始
@@ -68,7 +72,7 @@ if &runtimepath !~# '/dein.vim'
 endif
 
 if dein#load_state(s:dein_dir)
-	call dein#begin(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
 	" プラグインリストを収めた TOML ファイル
 	let s:toml_dir  = expand($HOME . '/AppData/Local/nvim/dein/toml')
