@@ -1,5 +1,9 @@
-" 設定ファイルのあるディレクトリへ移動する
+" 設定ファイルのあるディレクトリへ移動する。
 lcd <sfile>:h
+
+" ctrlpの探索ルートパスを指定する。
+let ctrlpRootPath = 'C:\ESP'
+exec 'nnoremap <silent> <C-p> :<C-u>CtrlP ' . ctrlpRootPath . '<CR>'
 
 " pathの設定
 setlocal path+=
