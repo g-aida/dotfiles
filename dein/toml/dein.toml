@@ -204,8 +204,8 @@ hook_add = '''
 syntax on
 set t_Co=256
 set cursorline
-" colorscheme onehalflight
-colorscheme onehalfdark
+colorscheme onehalflight
+" colorscheme onehalfdark
 " let g:airline_theme='onehalfdark'
 let g:lightline = { 'colorscheme': 'onehalfdark' }
 '''
@@ -639,6 +639,20 @@ nnoremap <silent> ,m :Mark<CR>
 # ファイルをあいまい検索
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+nnoremap [ctrlp] <Nop>
+nmap <Space>p [ctrlp]
+nnoremap [ctrlp]b :<C-u>CtrlPBuffer<CR>
+nnoremap [ctrlp]l :<C-u>CtrlPLine<CR>
+nnoremap [ctrlp]p :<C-u>CtrlPMixed<CR>
+nnoremap [ctrlp]q :<C-u>CtrlPQuickFix<CR>
+
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
+let g:ctrlp_prompt_mappings = {
+	\ 'PrtBS()':              ['<bs>', '<c-h>'],
+    \ 'PrtCurLeft()':         ['<left>', '<c-^>'],
+	\ }
+'''
 
 # fFtT押下でジャンプ先をハイライトする
 [[plugins]]
@@ -685,6 +699,13 @@ call lexima#add_rule({'char': '<C-h>', 'at': '```\%#```', 'input': '<BS><BS><BS>
 call lexima#add_rule({'char': '<C-h>', 'at': '( \%# )', 'delete': 1})
 call lexima#add_rule({'char': '<C-h>', 'at': '{ \%# }', 'delete': 1})
 call lexima#add_rule({'char': '<C-h>', 'at': '\[ \%# ]', 'delete': 1})
+'''
+
+# Auto change directory to project root directory of the file.
+[[plugins]]
+repo = 'mattn/vim-findroot'
+hook_add = '''
+let g:findroot_not_for_subdir = 0
 '''
 
 # 行選択し差分を表示する
