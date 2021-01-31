@@ -46,6 +46,12 @@ let g:lsp_highlight_references_enabled = 1
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
 let g:lsp_settings_servers_dir = '~/vimfiles/lsp-searvers'
+let g:lsp_settings = {
+ \ 'solargraph': {
+ \   'disabled': 0,
+ \   'blocklist': ['', 'ruby'],
+ \  },
+ \}
 '''
 
 [[plugins]]
@@ -103,26 +109,25 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
-"# " linterを指定
-"# let g:ale_linters = {
-"# 	\	'java' : [],
-"# 	\	'javascript' : [],
-"# 	\ }
-"#
-"# " ワーニング・エラー間を素早くジャンプ
-"# nmap <silent> [e <Plug>(ale_previous_wrap)
-"# nmap <silent> ]e <Plug>(ale_next_wrap)
+" linterを指定
+" let g:ale_linters = {
+" 	\	'java' : [],
+" 	\	'javascript' : [],
+" 	\ }
+"
+" ワーニング・エラー間を素早くジャンプ
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
 
 let g:ale_fixers = {
 	\   'ruby': ['rubocop'],
 	\}
 
-" #
-" # " 左端のシンボルカラムを表示したままにする
-" # let g:ale_sign_column_always = 1
-" # " シンボルを変更する
-" # let g:ale_sign_error   = ''
-" # let g:ale_sign_warning = ''
+" 左端のシンボルカラムを表示したままにする
+let g:ale_sign_column_always = 1
+" シンボルを変更する
+let g:ale_sign_error   = ''
+let g:ale_sign_warning = ''
 '''
 
 # # javascriptのインデント・シンタックスハイライト
