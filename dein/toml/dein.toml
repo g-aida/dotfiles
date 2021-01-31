@@ -614,34 +614,34 @@ repo = 'bronson/vim-trailing-whitespace'
 repo = 'cespare/vim-toml'
 
 # Vimでfzfを使用する
-[[plugins]]
-repo = 'junegunn/fzf'
-hook_post_update = '''
-	if has('win32')
-		let cmd = '~/GitHub/fzf/install'
-	endif
-	let g:dein#plugin.build = cmd
-'''
-merged = '0'
+# [[plugins]]
+# repo = 'junegunn/fzf'
+# hook_post_update = '''
+# 	if has('win32')
+# 		let cmd = '~/GitHub/fzf/install'
+# 	endif
+# 	let g:dein#plugin.build = cmd
+# '''
+# merged = '0'
 
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'junegunn/fzf'
-hook_add = '''
-command! -bang -nargs=* Rg
-	\ call fzf#vim#grep(
-	\   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
-	\   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
-
-" キーバインド
-nnoremap <silent> ,f :Files<CR>
-nnoremap <silent> ,g :GFiles<CR>
-nnoremap <silent> ,G :GFiles?<CR>
-nnoremap <silent> ,b :Buffers<CR>
-nnoremap <silent> ,l :BLines<CR>
-nnoremap <silent> ,h :History<CR>
-nnoremap <silent> ,m :Mark<CR>
-'''
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
+# depends = 'junegunn/fzf'
+# hook_add = '''
+# command! -bang -nargs=* Rg
+# 	\ call fzf#vim#grep(
+# 	\   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+# 	\   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
+#
+# " キーバインド
+# nnoremap <silent> ,f :Files<CR>
+# nnoremap <silent> ,g :GFiles<CR>
+# nnoremap <silent> ,G :GFiles?<CR>
+# nnoremap <silent> ,b :Buffers<CR>
+# nnoremap <silent> ,l :BLines<CR>
+# nnoremap <silent> ,h :History<CR>
+# nnoremap <silent> ,m :Mark<CR>
+# '''
 
 # ファイルをあいまい検索
 [[plugins]]

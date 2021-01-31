@@ -152,7 +152,8 @@ if !has('gui_running')				" gvimではない？ (== 端末)
 endif
 set nofixendofline					" Windowsのエディタの人達に嫌われない設定
 " 2021/01/12 fzf.vimのバグでレイアウトが崩れてしまうので、解消されるまでコメントアウト
-"set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にする
+" ⇒fzfからctrlpに乗り換えたので復活。
+set ambiwidth=double				" ○, △, □等の文字幅をASCII文字の倍にする
 set directory-=.					" swapファイルはローカル作成がトラブル少なめ
 set formatoptions+=mM				" 日本語の途中でも折り返す
 set nrformats=						" すべての数字を10進数として扱う
