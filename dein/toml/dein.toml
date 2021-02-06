@@ -725,6 +725,12 @@ hook_add = '''
 let g:findroot_not_for_subdir = 0
 '''
 
+# Run your favorite search tool from Vim, with an enhanced results list.
+[[plugins]]
+repo = 'mileszs/ack.vim'
+hook_add = '''
+'''
+
 # Brings physics-based smooth scrolling to the Vim/Neovim world!
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
