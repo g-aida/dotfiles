@@ -746,14 +746,14 @@ let g:ackhighlight = 1
 '''
 
 # Brings physics-based smooth scrolling to the Vim/Neovim world!
-[[plugins]]
-repo = 'yuttie/comfortable-motion.vim'
-hook_add = '''
-let g:comfortable_motion_friction = 5.0
-let g:comfortable_motion_air_drag = 8.0
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
-'''
+# [[plugins]]
+# repo = 'yuttie/comfortable-motion.vim'
+# hook_add = '''
+# let g:comfortable_motion_friction = 5.0
+# let g:comfortable_motion_air_drag = 8.0
+# noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+# noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+# '''
 
 # 行選択し差分を表示する
 [[plugins]]
