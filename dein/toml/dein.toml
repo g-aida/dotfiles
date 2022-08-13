@@ -275,69 +275,69 @@ let g:closetag_emptyTags_caseSensitive = 1
 # [[plugins]]
 # repo = 'mattn/vim-molder-operations'
 
-# asynchronous tree viewer
-[[plugins]]
-repo = 'lambdalisue/fern.vim'
-hook_add = '''
-" let g:fern#loglevel = -1
-" <C-e>でProject drawerを開き、現在のファイル名にフォーカスする。
-nnoremap <silent><C-e> :<C-u>Fern . -drawer -reveal=%<CR>
+# # asynchronous tree viewer
+# [[plugins]]
+# repo = 'lambdalisue/fern.vim'
+# hook_add = '''
+# " let g:fern#loglevel = -1
+# " <C-e>でProject drawerを開き、現在のファイル名にフォーカスする。
+# nnoremap <silent><C-e> :<C-u>Fern . -drawer -reveal=%<CR>
+#
+# function! FernInit() abort
+#   nmap <buffer><expr>
+# 	  \ <Plug>(fern-my-open-expand-collapse)
+# 	  \	fern#smart#leaf(
+# 	  \	  "\<Plug>(fern-action-open:select)",
+# 	  \	  "\<Plug>(fern-action-expand)",
+# 	  \	  "\<Plug>(fern-action-collapse)",
+# 	  \ )
+#   nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+#   nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+#   nmap <buffer> p <Plug>(fern-action-new-path)
+#   nmap <buffer> F <Plug>(fern-action-new-file)
+#   nmap <buffer> d <Plug>(fern-action-remove)
+#   nmap <buffer> m <Plug>(fern-action-move)
+#   nmap <buffer> M <Plug>(fern-action-rename)
+#   nmap <buffer> h <Plug>(fern-action-hidden:toggle)
+#   nmap <buffer> r <Plug>(fern-action-reload)
+#   nmap <buffer> b <Plug>(fern-action-open:split)
+#   nmap <buffer> v <Plug>(fern-action-open:vsplit)
+#   nmap <buffer> x <Plug>(fern-action-collapse)
+# endfunction
+#
+# augroup FurnGroup
+#   autocmd!
+#   autocmd FileType fern call FernInit()
+# augroup END
+# '''
 
-function! FernInit() abort
-  nmap <buffer><expr>
-	  \ <Plug>(fern-my-open-expand-collapse)
-	  \	fern#smart#leaf(
-	  \	  "\<Plug>(fern-action-open:select)",
-	  \	  "\<Plug>(fern-action-expand)",
-	  \	  "\<Plug>(fern-action-collapse)",
-	  \ )
-  nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
-  nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
-  nmap <buffer> p <Plug>(fern-action-new-path)
-  nmap <buffer> F <Plug>(fern-action-new-file)
-  nmap <buffer> d <Plug>(fern-action-remove)
-  nmap <buffer> m <Plug>(fern-action-move)
-  nmap <buffer> M <Plug>(fern-action-rename)
-  nmap <buffer> h <Plug>(fern-action-hidden:toggle)
-  nmap <buffer> r <Plug>(fern-action-reload)
-  nmap <buffer> b <Plug>(fern-action-open:split)
-  nmap <buffer> v <Plug>(fern-action-open:vsplit)
-  nmap <buffer> x <Plug>(fern-action-collapse)
-endfunction
-
-augroup FurnGroup
-  autocmd!
-  autocmd FileType fern call FernInit()
-augroup END
-'''
-
-# A plugin for fern.vim to make the fern.vim as a default file explorer instead of Netrw.
-[[plugins]]
-repo = 'lambdalisue/fern-hijack.vim'
-depends = [
-	'lambdalisue/fern.vim'
-]
+# # A plugin for fern.vim to make the fern.vim as a default file explorer instead of Netrw.
+# [[plugins]]
+# repo = 'lambdalisue/fern-hijack.vim'
+# depends = [
+# 	'lambdalisue/fern.vim'
+# ]
 
 # A simplified version of vim-devicons which does NOT provide any 3rd party integrations in itself. In otherwords, it is a fundemental plugin to handle Nerd Fonts from Vim.
 [[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
 
-# fern.vim plugin which add file type icons through lambdalisue/nerdfont.vim.
-[[plugins]]
-repo = 'lambdalisue/fern-renderer-nerdfont.vim'
-depends = [
-	'lambdalisue/fern.vim'
-]
-hook_add = '''
-let g:fern#renderer = "nerdfont"
-'''
+# # fern.vim plugin which add file type icons through lambdalisue/nerdfont.vim.
+# [[plugins]]
+# repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+# depends = [
+# 	'lambdalisue/fern.vim'
+# ]
+# hook_add = '''
+# let g:fern#renderer = "nerdfont"
+# '''
 
-# fern-git-status is a fern.vim plugin to add git status on node's badge asynchronously.
-[[plugins]]
-repo = 'lambdalisue/fern-git-status.vim'
-depends = [
-	'lambdalisue/fern.vim'
-]
+# # fern-git-status is a fern.vim plugin to add git status on node's badge asynchronously.
+# [[plugins]]
+# repo = 'lambdalisue/fern-git-status.vim'
+# depends = [
+# 	'lambdalisue/fern.vim'
+# ]
 
 # カレントディレクトリのファイル一覧を表示
 #[[plugins]]
